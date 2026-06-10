@@ -60,7 +60,10 @@ const KBAudio = (() => {
   };
 })();
 
-/* ---------- Wake Lock (Display anlassen während des Trainings) ---------- */
+/* ---------- Wake Lock (Display anlassen während des Trainings) ----------
+   Wird von der App pro Workout-Flow geschaltet (an beim Start, aus beim
+   Schließen des Overlays) — nicht pro Timer, sonst ginge das Display im
+   Zirkel-Teil von Workout A zwischen den Timern wieder aus. */
 
 const KBWake = (() => {
   let lock = null;
@@ -121,7 +124,6 @@ const KBTimer = (() => {
   function finish() {
     clear();
     running = false;
-    KBWake.off();
     KBAudio.finish();
     if (cb.onDone) cb.onDone();
   }
@@ -161,7 +163,6 @@ const KBTimer = (() => {
       running = true;
       pausedLeft = null;
       KBAudio.unlock();
-      KBWake.on();
       startPhase(0);
       if (cb.onTick && phases.length) cb.onTick(phases[0], 0, phases[0].seconds);
       interval = setInterval(tick, 200);
@@ -180,7 +181,6 @@ const KBTimer = (() => {
       clear();
       running = false;
       pausedLeft = null;
-      KBWake.off();
     },
     isPaused() { return pausedLeft !== null; },
     isRunning() { return running; },

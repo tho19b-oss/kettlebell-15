@@ -265,6 +265,19 @@ function exVideo(exId, opts) {
 
 function kcalOf(min) { return Math.round(min * KCAL_PER_MIN); }
 
+function greeting() {
+  const h = new Date().getHours();
+  if (h < 5) return "Noch wach? 🌙";
+  if (h < 11) return "Guten Morgen ☀️";
+  if (h < 18) return "Hallo! 👋";
+  return "Guten Abend 🌙";
+}
+
+/* Nutzer mit „Bewegung reduzieren" bekommen Standbilder statt Auto-Loops */
+function reducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 /* ---------------- Screen: Heute ---------------- */
 
 function renderHome() {
@@ -344,7 +357,7 @@ function renderHome() {
     <header class="row">
       <div class="grow">
         <div class="eyebrow">${dateLabel}</div>
-        <h1 class="h-greeting">Hallo! 👋</h1>
+        <h1 class="h-greeting">${greeting()}</h1>
       </div>
       <span class="pill pill--a" title="Streak">${ICONS.flame.replace('viewBox', 'width="13" height="13" viewBox')} ${streak}</span>
       <button class="icon-btn" data-action="open-settings" aria-label="Einstellungen">${ICONS.gear}</button>
@@ -635,7 +648,7 @@ function renderSettingsOverlay() {
       </div>
       <p class="text-center text-2 small mt-24">Alle Daten bleiben lokal auf deinem Gerät.</p>
     </div>
-  `);
+  `, { keepScroll: true });
 }
 
 /* ---------------- Tabs ---------------- */
@@ -653,9 +666,11 @@ function switchTab(tab) {
 
 /* ---------------- Overlay-Grundgerüst ---------------- */
 
-function openOverlay(html) {
+/* opts.keepScroll: Scroll-Position übernehmen — nur für Re-Renders desselben
+   Screens (z. B. Umschalter in Einstellungen/B-Auswahl). Neue Screens starten oben. */
+function openOverlay(html, opts) {
   const ov = el("overlay");
-  const prevBody = ov.hidden ? null : ov.querySelector(".ov-body");
+  const prevBody = (opts && opts.keepScroll && !ov.hidden) ? ov.querySelector(".ov-body") : null;
   const scroll = prevBody ? prevBody.scrollTop : 0;
   ov.innerHTML = html;
   ov.hidden = false;
@@ -667,6 +682,7 @@ function openOverlay(html) {
   // nicht immer — Property setzen und play() explizit anstoßen
   ov.querySelectorAll("video[autoplay]").forEach((v) => {
     v.muted = true;
+    if (reducedMotion()) { v.pause(); return; }
     const p = v.play();
     if (p) p.catch(() => {});
   });
@@ -674,6 +690,7 @@ function openOverlay(html) {
 
 function closeOverlay() {
   KBTimer.stop();
+  KBWake.off();
   const ov = el("overlay");
   ov.hidden = true;
   ov.innerHTML = "";
@@ -697,6 +714,7 @@ function ovHead(title, sub) {
 /* ---------------- Workout A: Zirkel ---------------- */
 
 function startFlowA() {
+  KBWake.on();
   const w = lastWeights("A") || { fs: DEFAULT_WEIGHT, cp: DEFAULT_WEIGHT, row: DEFAULT_WEIGHT };
   ui.flowA = {
     round: 1,
@@ -746,7 +764,7 @@ function renderFlowA() {
       <p class="text-2 small text-center">Alle 3 Übungen direkt nacheinander, dann 90 s Pause.</p>
     </div>
     <div class="ov-footer">
-      <button class="btn btn--primary" data-action="a-round" ${allDone ? "" : "disabled style='opacity:.4'"}>
+      <button class="btn btn--primary" data-action="a-round" ${allDone ? "" : "disabled"}>
         ${f.round < WORKOUT_A.rounds ? "Runde abschließen → 90 s Pause" : "Workout abschließen"}
       </button>
     </div>
@@ -813,6 +831,7 @@ function advanceRoundA() {
 /* ---------------- Workout B: Auswahl + Timer ---------------- */
 
 function startFlowB() {
+  KBWake.on();
   const w = lastWeights("B") || { swing: DEFAULT_WEIGHT, thruster: DEFAULT_WEIGHT };
   ui.flowB = {
     mode: "emom",
@@ -883,7 +902,7 @@ function renderFlowBSelect() {
     <div class="ov-footer">
       <button class="btn btn--primary" data-action="b-start">${ICONS.play} Workout starten</button>
     </div>
-  `);
+  `, { keepScroll: true });
 }
 
 function buildPhasesB() {
@@ -985,8 +1004,10 @@ function startTimerB() {
           if (!tv.src.endsWith(src)) tv.src = src;
           tv.hidden = false;
           tv.muted = true;
-          const pr = tv.play();
-          if (pr) pr.catch(() => {});
+          if (!reducedMotion()) {
+            const pr = tv.play();
+            if (pr) pr.catch(() => {});
+          }
         } else {
           tv.pause();
           tv.hidden = true;
@@ -1171,8 +1192,15 @@ document.addEventListener("click", (ev) => {
     /* --- Workout A --- */
     case "a-check": {
       const f = ui.flowA;
-      f.done[t.dataset.ex] = !f.done[t.dataset.ex];
-      renderFlowA();
+      if (!f) break;
+      const ex = t.dataset.ex;
+      f.done[ex] = !f.done[ex];
+      // Gezielt im DOM togglen statt neu rendern — sonst springt der Scroll
+      // und die Technik-Videos starten von vorn
+      t.closest(".ex-card").classList.toggle("is-done", f.done[ex]);
+      const allDone = WORKOUT_A.exercises.every((e) => f.done[e.id]);
+      const btn = $('#overlay [data-action="a-round"]');
+      if (btn) btn.disabled = !allDone;
       break;
     }
     case "a-round":
@@ -1287,7 +1315,7 @@ document.addEventListener("click", (ev) => {
 
 /* Nach Rückkehr in die App (Screen-Lock, App-Wechsel) pausierte Technik-Loops wieder anstoßen */
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState !== "visible") return;
+  if (document.visibilityState !== "visible" || reducedMotion()) return;
   document.querySelectorAll("#overlay video[autoplay], #overlay .t-video:not([hidden])").forEach((v) => {
     v.muted = true;
     const p = v.play();
