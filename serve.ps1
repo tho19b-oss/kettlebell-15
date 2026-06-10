@@ -10,6 +10,7 @@ $mime = @{
   ".json"        = "application/json; charset=utf-8"
   ".webmanifest" = "application/manifest+json; charset=utf-8"
   ".png"         = "image/png"
+  ".mp4"         = "video/mp4"
   ".svg"         = "image/svg+xml"
   ".ico"         = "image/x-icon"
   ".md"          = "text/plain; charset=utf-8"

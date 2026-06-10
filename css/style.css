@@ -430,6 +430,19 @@ svg { display: block; }
 .check svg { width: 16px; height: 16px; }
 .ex-card.is-done .check { background: var(--orange); border-color: var(--orange); color: #16100B; }
 
+/* Technik-Video — stummer Loop; Clips sind hochkant (~9:16) */
+.ex-video {
+  display: block;
+  height: 250px;
+  aspect-ratio: 9 / 16;
+  margin: 14px auto 2px;
+  border-radius: 16px;
+  object-fit: cover;
+  background: var(--bg-elev);
+}
+.guide-card .ex-video { height: 320px; margin: 14px auto 4px; }
+.t-video { height: 170px; margin: 6px auto 0; border-radius: 14px; }
+
 /* Gewichts-Stepper */
 .stepper {
   display: flex;

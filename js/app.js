@@ -17,6 +17,7 @@ const EXERCISES = {
     name: "Front Squat",
     de: "Frontkniebeuge",
     muscles: "Beine, Gesäß, Core",
+    video: "videos/front-squat.mp4",
     oneBell: "Mit 1 Kettlebell: Goblet Squat — die Kettlebell mit beiden Händen vor der Brust halten.",
     tips: [
       "Kettlebells in der Rack-Position an Brust/Unterarm ablegen, Ellbogen eng",
@@ -250,6 +251,16 @@ function el(id) { return document.getElementById(id); }
 
 function variantText(exId) {
   return state.settings.bells === 1 ? EXERCISES[exId].oneBell : "Mit 2 Kettlebells ausführen";
+}
+
+/* Technik-Video als stummer Loop (verhält sich wie ein GIF, ist aber viel kleiner).
+   Im Workout: Autoplay ohne Controls. Im Guide: mit Controls, Start per Tipp. */
+function exVideo(exId, opts) {
+  const src = EXERCISES[exId].video;
+  if (!src) return "";
+  return (opts && opts.controls)
+    ? `<video class="ex-video" src="${src}" controls muted loop playsinline preload="metadata"></video>`
+    : `<video class="ex-video" src="${src}" autoplay muted loop playsinline preload="auto"></video>`;
 }
 
 function kcalOf(min) { return Math.round(min * KCAL_PER_MIN); }
@@ -530,6 +541,7 @@ function renderGuide() {
             </div>
             <span class="pill ${inA ? "pill--a" : "pill--b"}">${inA ? "Workout A" : "Workout B"}</span>
           </div>
+          ${exVideo(id, { controls: true })}
           <ul>${e.tips.map((t) => `<li>${t}</li>`).join("")}</ul>
           <div class="g-alt">${e.oneBell}</div>
         </div>`;
@@ -651,6 +663,13 @@ function openOverlay(html) {
     const body = ov.querySelector(".ov-body");
     if (body) body.scrollTop = scroll;
   }
+  // Autoplay-Nudge: das muted-Attribut aus innerHTML reicht mobilen Browsern
+  // nicht immer — Property setzen und play() explizit anstoßen
+  ov.querySelectorAll("video[autoplay]").forEach((v) => {
+    v.muted = true;
+    const p = v.play();
+    if (p) p.catch(() => {});
+  });
 }
 
 function closeOverlay() {
@@ -709,6 +728,7 @@ function renderFlowA() {
             </div>
             <div class="ex-reps"><div class="n">${e.reps}</div><div class="l">Wdh.</div></div>
           </div>
+          ${exVideo(e.id)}
           <div class="stepper">
             <button class="s-btn" data-action="w-step" data-flow="a" data-ex="${e.id}" data-d="-2">−</button>
             <div class="s-val">${f.weights[e.id]}<small>kg</small></div>
@@ -838,6 +858,7 @@ function renderFlowBSelect() {
             <div class="ex-sub">${variantText("swing")}</div>
           </div>
         </div>
+        ${exVideo("swing")}
         <div class="stepper">
           <button class="s-btn" data-action="w-step" data-flow="b" data-ex="swing" data-d="-2">−</button>
           <div class="s-val">${f.weights.swing}<small>kg</small></div>
@@ -851,6 +872,7 @@ function renderFlowBSelect() {
             <div class="ex-sub">${variantText("thruster")}</div>
           </div>
         </div>
+        ${exVideo("thruster")}
         <div class="stepper">
           <button class="s-btn" data-action="w-step" data-flow="b" data-ex="thruster" data-d="-2">−</button>
           <div class="s-val">${f.weights.thruster}<small>kg</small></div>
@@ -938,6 +960,7 @@ function startTimerB() {
         <div class="target" id="tTarget"></div>
       </div>
       <div class="t-next" id="tNext"></div>
+      <video class="ex-video t-video" id="tVideo" muted loop playsinline preload="auto" hidden></video>
       <div class="t-controls">
         <button class="btn btn--ghost" data-action="t-pause" id="tPauseBtn">${ICONS.pause} Pause</button>
       </div>
@@ -954,6 +977,21 @@ function startTimerB() {
       const ring = el("tRing");
       ring.classList.toggle("is-rest", p.type === "rest");
       ring.classList.toggle("is-thruster", p.ex === "thruster");
+      // Technik-Loop zur aktuellen Übung (falls ein Clip hinterlegt ist)
+      const tv = el("tVideo");
+      if (tv) {
+        const src = p.ex && EXERCISES[p.ex].video;
+        if (src) {
+          if (!tv.src.endsWith(src)) tv.src = src;
+          tv.hidden = false;
+          tv.muted = true;
+          const pr = tv.play();
+          if (pr) pr.catch(() => {});
+        } else {
+          tv.pause();
+          tv.hidden = true;
+        }
+      }
     },
     onTick: (p, i, left) => updateRing(p.seconds, left),
     onDone: () => {
@@ -1245,6 +1283,16 @@ document.addEventListener("click", (ev) => {
       break;
     }
   }
+});
+
+/* Nach Rückkehr in die App (Screen-Lock, App-Wechsel) pausierte Technik-Loops wieder anstoßen */
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  document.querySelectorAll("#overlay video[autoplay], #overlay .t-video:not([hidden])").forEach((v) => {
+    v.muted = true;
+    const p = v.play();
+    if (p) p.catch(() => {});
+  });
 });
 
 /* Modal: Klick auf Backdrop schließt (außer es ist ein Abbruch-Dialog mit laufendem Timer — dann lieber explizit) */
