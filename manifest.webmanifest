@@ -1,0 +1,32 @@
+{
+  "name": "Kettlebell 15 — 15-Minuten-Trainingsplan",
+  "short_name": "Kettlebell 15",
+  "description": "Dein 15-Minuten-Kettlebell-Plan für Muskelaufbau: Workout A (Kraft) und Workout B (Conditioning) im Wechsel — Mo, Mi, Fr.",
+  "lang": "de",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B0B0D",
+  "theme_color": "#0B0B0D",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
