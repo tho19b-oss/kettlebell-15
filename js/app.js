@@ -3,7 +3,7 @@
    Programm nach George Thomas: „The Only 15 Minute Kettlebell
    Plan You Need For 2026" (https://www.youtube.com/watch?v=_OGfNfb8Gcg)
 
-   - 2-Wochen-Zyklus: Wo. 1 = A(Mo) B(Mi) A(Fr), Wo. 2 = B A B
+   - 2-Wochen-Rotation: Wo. 1 = A(Mo) B(Mi) A(Fr), Wo. 2 = B A B
    - Workout A: Kraft — Zirkel ×3 (Front Squat, Clean & Press, Row), 90 s Pause
    - Workout B: Conditioning — Swings + Thrusters als EMOM oder Intervalle
    ============================================================ */
@@ -176,7 +176,7 @@ function mondayOf(d) {
   return x;
 }
 
-/* 0 = Zyklus-Woche 1 (A-B-A), 1 = Zyklus-Woche 2 (B-A-B) */
+/* 0 = Rotations-Woche 1 (A-B-A), 1 = Rotations-Woche 2 (B-A-B) */
 function weekIndexFor(date) {
   const start = parseISO(state.settings.cycleStart);
   const diffDays = Math.round((mondayOf(date) - start) / 864e5);
@@ -365,7 +365,7 @@ function renderHome() {
 
     <div class="mt-18">${hero}</div>
 
-    <div class="section-title">Diese Woche <small>Zyklus-Woche ${wIdx + 1} · ${wIdx === 0 ? "A–B–A" : "B–A–B"}</small></div>
+    <div class="section-title">Diese Woche <small>Rotations-Woche ${wIdx + 1} · ${wIdx === 0 ? "A–B–A" : "B–A–B"}</small></div>
     <div class="weekstrip">${strip}</div>
 
     <div class="section-title">Deine Stats</div>
@@ -573,7 +573,7 @@ function renderGuide() {
         <li><strong>Mo / Mi / Fr</strong> — 15 Minuten, zwei Workouts im Wechsel</li>
         <li><strong>Workout A (Kraft):</strong> Zirkel ×3 — Front Squat, Clean &amp; Press, Row, danach 90 s Pause</li>
         <li><strong>Workout B (Conditioning):</strong> Swings + Thrusters — als EMOM oder Intervalle</li>
-        <li><strong>2-Wochen-Zyklus:</strong> Woche 1 = A·B·A, Woche 2 = B·A·B — so machst du jedes Workout 3× in 2 Wochen</li>
+        <li><strong>2-Wochen-Rotation:</strong> Woche 1 = A·B·A, Woche 2 = B·A·B — so machst du jedes Workout 3× in 2 Wochen</li>
         <li><strong>Di / Do / Sa / So sind Ruhetage:</strong> mind. 24 h, ideal 48 h Pause — Muskeln wachsen in der Erholung</li>
       </ul>
       <a class="link-video mt-12" style="display:inline-flex" href="${VIDEO_URL}" target="_blank" rel="noopener">${ICONS.ext} Original-Video von George Thomas ansehen</a>
@@ -633,7 +633,7 @@ function renderSettingsOverlay() {
         </div>
         <div class="setting-row">
           <div class="grow">
-            <div class="s-title">Zyklus-Woche</div>
+            <div class="s-title">Rotations-Woche</div>
             <div class="s-sub">Aktuell: Woche ${wIdx + 1} (${wIdx === 0 ? "A–B–A" : "B–A–B"})</div>
           </div>
           <button class="btn btn--ghost btn--small" data-action="cycle-swap">Tauschen</button>

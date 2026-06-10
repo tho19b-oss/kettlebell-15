@@ -14,12 +14,12 @@ Ziel: **Muskelaufbau mit 15 Minuten pro Trainingstag** — ohne Studio, mit 1–
 | **Wdh.** | 8–12 · 6–12 · 10–15 | EMOM: 15–20 Swings / 5–6 Thrusters |
 
 - **Trainingstage: Mo / Mi / Fr** — dazwischen mind. 24 h (ideal 48 h) Erholung
-- **2-Wochen-Zyklus:** Woche 1 = A·B·A, Woche 2 = B·A·B → jedes Workout 3× pro 2 Wochen
+- **2-Wochen-Rotation:** Woche 1 = A·B·A, Woche 2 = B·A·B → jedes Workout 3× pro 2 Wochen
 - Nur 1 Kettlebell? Die App zeigt automatisch die 1-KB-Varianten (Goblet Squat, einarmiges Rudern, …)
 
 ## Features
 
-- 📅 Dashboard mit Tageszuordnung (A / B / Ruhetag), Wochenübersicht und Zyklus-Anzeige
+- 📅 Dashboard mit Tageszuordnung (A / B / Ruhetag), Wochenübersicht und Rotations-Anzeige
 - ⏱️ Geführte Workouts: Zirkel-Tracker mit 90-s-Pausentimer, EMOM- und Intervall-Timer mit Sound-Cues
 - 🏋️ Gewichts-Tracking pro Übung mit Progressions-Chart
 - 🔥 Streak, Minuten- und Kalorien-Statistiken
