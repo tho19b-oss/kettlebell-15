@@ -22,7 +22,9 @@ Ziel: **Muskelaufbau mit 15 Minuten pro Trainingstag** — ohne Studio, mit 1–
 - 📅 Dashboard mit Tageszuordnung (A / B / Ruhetag), Wochenübersicht und Rotations-Anzeige
 - ⏱️ Geführte Workouts: Zirkel-Tracker mit 90-s-Pausentimer, EMOM- und Intervall-Timer mit Sound-Cues
 - 🏋️ Gewichts-Tracking pro Übung mit Progressions-Chart
-- 🔥 Streak, Minuten- und Kalorien-Statistiken
+- 🔥 Streak, Minuten- und Kalorien-Statistiken — die Dauer wird echt gemessen
+- 💾 Backup: Verlauf & Einstellungen als JSON exportieren und wieder importieren
+- 🗑️ Einzelne Verlaufs-Einträge per Antippen löschen
 - 📖 Übungs-Guide mit Technik-Tipps aus dem Video
 - 🎬 Technik-Videos laufen als stummer Loop direkt in der Übungskarte — im Workout und im Guide
 - 📴 Offline-fähig, alle Daten bleiben lokal im Browser (localStorage)

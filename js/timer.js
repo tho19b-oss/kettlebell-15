@@ -124,7 +124,10 @@ const KBTimer = (() => {
   function finish() {
     clear();
     running = false;
-    KBAudio.finish();
+    // endSound: "phase" für Zwischen-Timer (z. B. 90-s-Pause in Workout A),
+    // damit die Fanfare dem echten Workout-Ende vorbehalten bleibt
+    if (cb.endSound === "phase") KBAudio.phase();
+    else KBAudio.finish();
     if (cb.onDone) cb.onDone();
   }
 
@@ -135,9 +138,17 @@ const KBTimer = (() => {
     const left = p.seconds - elapsed;
 
     if (left <= 0) {
-      // Phase vorbei → nächste (Beep nur, wenn es weitergeht; Ende hat eigenen Sound)
-      if (idx + 1 < phases.length) KBAudio.phase();
-      startPhase(idx + 1, -left);
+      // Phase vorbei → nächste. Der Überhang kann mehrere Phasen umfassen
+      // (Tab war eingefroren) — alle übersprungenen in einem Schritt aufholen,
+      // ein einziger Beep statt einer Beep-Salve pro Phase.
+      let carry = -left;
+      let next = idx + 1;
+      while (next < phases.length && carry >= phases[next].seconds) {
+        carry -= phases[next].seconds;
+        next++;
+      }
+      if (next < phases.length) KBAudio.phase();
+      startPhase(next, carry);
       if (running && cb.onTick && idx < phases.length) {
         const np = phases[idx];
         cb.onTick(np, idx, Math.max(0, np.seconds - (Date.now() - phaseStart) / 1000));

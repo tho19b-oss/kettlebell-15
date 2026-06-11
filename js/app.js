@@ -129,6 +129,7 @@ const ui = {
   flowB: null,
   pendingEntry: null,
   modalActions: [],
+  elapsedInterval: null,
 };
 
 function loadState() {
@@ -150,6 +151,64 @@ function loadState() {
 
 function saveState() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (_) {}
+}
+
+/* ---------------- Backup: Export & Import ---------------- */
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "kettlebell15-backup-" + fmtISO(new Date()) + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function importDataPicker() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "application/json,.json";
+  input.onchange = () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      let parsed = null;
+      try { parsed = JSON.parse(reader.result); } catch (_) {}
+      if (!parsed || !Array.isArray(parsed.history)) {
+        showModal({
+          title: "Import fehlgeschlagen",
+          text: "Die Datei ist kein gültiges Kettlebell-15-Backup.",
+          actions: [{ label: "OK", cls: "btn--primary", fn: hideModal }],
+        });
+        return;
+      }
+      showModal({
+        title: "Backup importieren?",
+        text: `${parsed.history.length} Workouts aus dem Backup ersetzen deine aktuellen Daten (${state.history.length} Workouts).`,
+        actions: [
+          { label: "Abbrechen", cls: "btn--ghost", fn: hideModal },
+          { label: "Importieren", cls: "btn--primary", fn: () => { applyImport(parsed); hideModal(); } },
+        ],
+      });
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+function applyImport(parsed) {
+  state = { settings: { bells: 2, sound: true, cycleStart: null }, history: [] };
+  state.settings = Object.assign(state.settings, parsed.settings || {});
+  state.history = Array.isArray(parsed.history) ? parsed.history : [];
+  if (!state.settings.cycleStart) state.settings.cycleStart = fmtISO(mondayOf(new Date()));
+  KBAudio.setEnabled(state.settings.sound);
+  saveState();
+  renderHome();
+  renderProgress();
+  renderSettingsOverlay();
 }
 
 /* ---------------- Datum & Plan-Logik ---------------- */
@@ -305,14 +364,17 @@ function renderHome() {
           <span>${ICONS.bolt}${isA ? "3 Runden Zirkel" : "EMOM oder Intervalle"}</span>
         </div>
         <button class="btn btn--primary" data-action="start-workout" data-w="${todays}">${ICONS.play} Workout starten</button>
+        <button class="btn-link" data-action="choose-workout">Lieber tauschen? Workout wählen</button>
       </div>`;
   } else if (todays && doneToday.length > 0) {
     const next = nextTrainingInfo(today);
+    // Falls getauscht wurde, das tatsächlich absolvierte Workout nennen
+    const doneW = doneToday.some((h) => h.workout === todays) ? todays : doneToday[doneToday.length - 1].workout;
     hero = `
       <div class="hero hero--done">
         <div class="eyebrow">Erledigt</div>
         <h2>Stark! 💪</h2>
-        <p>Workout ${todays} ist im Kasten.${next ? ` Nächstes Training: <strong>${next.day} · Workout ${next.workout}</strong>.` : ""}</p>
+        <p>Workout ${doneW} ist im Kasten.${next ? ` Nächstes Training: <strong>${next.day} · Workout ${next.workout}</strong>.` : ""}</p>
         <button class="btn btn--ghost" data-action="choose-workout">Extra-Workout starten</button>
       </div>`;
   } else {
@@ -409,22 +471,22 @@ function renderProgress() {
     historyHtml = `<div class="empty"><div class="big">🏋️</div>Noch keine Workouts.<br>Starte heute — dein Verlauf erscheint hier.</div>`;
   } else {
     historyHtml = state.history
-      .slice()
+      .map((h, idx) => ({ h, idx }))
       .reverse()
       .slice(0, 30)
-      .map((h) => {
+      .map(({ h, idx }) => {
         const d = parseISO(h.date).toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit" });
         const modeLabel = h.mode === "emom" ? "EMOM" : h.mode === "interval" ? "Intervalle" : "Zirkel · 3 Runden";
         const focus = h.workout === "A" ? "Kraft" : "Conditioning";
         return `
-          <div class="history-item">
+          <button class="history-item" data-action="history-entry" data-idx="${idx}">
             <span class="h-icon ${h.workout === "A" ? "a" : "b"}">${h.workout}</span>
-            <div class="grow">
-              <div class="h-title">Workout ${h.workout} · ${focus}</div>
-              <div class="h-sub">${d} · ${modeLabel}</div>
-            </div>
-            <div class="h-min">${h.minutes} Min<br><span style="font-weight:600;color:var(--text-3)">≈ ${kcalOf(h.minutes)} kcal</span></div>
-          </div>`;
+            <span class="grow">
+              <span class="h-title">Workout ${h.workout} · ${focus}</span>
+              <span class="h-sub">${d} · ${modeLabel}</span>
+            </span>
+            <span class="h-min">${h.minutes} Min<br><span style="font-weight:600;color:var(--text-3)">≈ ${kcalOf(h.minutes)} kcal</span></span>
+          </button>`;
       })
       .join("");
   }
@@ -472,7 +534,7 @@ function renderChart(points) {
     return `<div class="empty small">Schließe ein Workout mit dieser Übung ab,<br>dann siehst du hier deine Gewichtskurve.</div>`;
   }
 
-  const W = 340, H = 150, padL = 30, padR = 14, padT = 26, padB = 12;
+  const W = 340, H = 162, padL = 30, padR = 14, padT = 26, padB = 24;
   const ws = points.map((p) => p.w);
   let min = Math.min(...ws), max = Math.max(...ws);
   if (min === max) { min -= 2; max += 2; }
@@ -499,10 +561,12 @@ function renderChart(points) {
                  <text class="grid-label" x="2" y="${y(v) + 3}">${Math.round(v)}</text>`)
     .join("");
 
-  /* Punkte + Badges (letzter Wert immer, Maximum zusätzlich) */
+  /* Punkte + Badges (letzter Wert immer; Maximum nur, wenn es höher liegt —
+     sonst stünden zwei identische Badges nebeneinander) */
   const lastI = points.length - 1;
   const maxI = ws.indexOf(Math.max(...ws));
-  const badgeIdx = new Set([lastI, maxI]);
+  const badgeIdx = new Set([lastI]);
+  if (ws[maxI] > ws[lastI]) badgeIdx.add(maxI);
   let dots = "";
   let badges = "";
   points.forEach((p, i) => {
@@ -518,6 +582,22 @@ function renderChart(points) {
     }
   });
 
+  /* Datums-Labels an der X-Achse — max. 4, sonst wird es eng */
+  const lblIdx = new Set([0, lastI]);
+  if (points.length > 4) {
+    lblIdx.add(Math.round(lastI / 3));
+    lblIdx.add(Math.round((2 * lastI) / 3));
+  }
+  let xLabels = "";
+  points.forEach((p, i) => {
+    if (!lblIdx.has(i)) return;
+    const d = parseISO(p.date);
+    const lbl = String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + ".";
+    const anchor = i === 0 ? "start" : i === lastI ? "end" : "middle";
+    const lx = i === 0 ? padL - 8 : i === lastI ? W - padR + 6 : x(i);
+    xLabels += `<text class="grid-label" x="${lx}" y="${H - 5}" text-anchor="${anchor}">${lbl}</text>`;
+  });
+
   const area = points.length > 1
     ? `<path class="step-area" d="${path} V ${H - padB} H ${x(0)} Z"/>`
     : "";
@@ -531,6 +611,7 @@ function renderChart(points) {
         </linearGradient>
       </defs>
       ${grid}
+      ${xLabels}
       ${area}
       ${points.length > 1 ? `<path class="step-line" d="${path}"/>` : ""}
       ${dots}
@@ -620,8 +701,8 @@ function renderSettingsOverlay() {
             <div class="s-sub">Passt die Übungsvarianten an dein Equipment an</div>
           </div>
           <div class="seg-control" style="width:120px">
-            <button class="${state.settings.bells === 1 ? "is-active" : ""}" data-action="set-bells" data-n="1">1</button>
-            <button class="${state.settings.bells === 2 ? "is-active" : ""}" data-action="set-bells" data-n="2">2</button>
+            <button class="${state.settings.bells === 1 ? "is-active" : ""}" data-action="set-bells" data-n="1" aria-pressed="${state.settings.bells === 1}">1</button>
+            <button class="${state.settings.bells === 2 ? "is-active" : ""}" data-action="set-bells" data-n="2" aria-pressed="${state.settings.bells === 2}">2</button>
           </div>
         </div>
         <div class="setting-row">
@@ -629,7 +710,7 @@ function renderSettingsOverlay() {
             <div class="s-title">Sound</div>
             <div class="s-sub">Beeps bei Phasenwechsel &amp; Countdown</div>
           </div>
-          <button class="switch ${state.settings.sound ? "is-on" : ""}" data-action="set-sound" aria-label="Sound umschalten"></button>
+          <button class="switch ${state.settings.sound ? "is-on" : ""}" data-action="set-sound" role="switch" aria-checked="${state.settings.sound}" aria-label="Sound umschalten"></button>
         </div>
         <div class="setting-row">
           <div class="grow">
@@ -637,6 +718,20 @@ function renderSettingsOverlay() {
             <div class="s-sub">Aktuell: Woche ${wIdx + 1} (${wIdx === 0 ? "A–B–A" : "B–A–B"})</div>
           </div>
           <button class="btn btn--ghost btn--small" data-action="cycle-swap">Tauschen</button>
+        </div>
+        <div class="setting-row">
+          <div class="grow">
+            <div class="s-title">Backup</div>
+            <div class="s-sub">Verlauf &amp; Einstellungen als Datei sichern</div>
+          </div>
+          <button class="btn btn--ghost btn--small" data-action="data-export">Export</button>
+        </div>
+        <div class="setting-row">
+          <div class="grow">
+            <div class="s-title">Wiederherstellen</div>
+            <div class="s-sub">Backup-Datei importieren — ersetzt aktuelle Daten</div>
+          </div>
+          <button class="btn btn--ghost btn--small" data-action="data-import">Import</button>
         </div>
         <div class="setting-row">
           <div class="grow">
@@ -691,6 +786,7 @@ function openOverlay(html, opts) {
 function closeOverlay() {
   KBTimer.stop();
   KBWake.off();
+  stopElapsedTicker();
   const ov = el("overlay");
   ov.hidden = true;
   ov.innerHTML = "";
@@ -713,6 +809,24 @@ function ovHead(title, sub) {
 
 /* ---------------- Workout A: Zirkel ---------------- */
 
+/* Verstrichene Gesamtzeit — Workout A hat keinen durchlaufenden Timer,
+   deshalb eigener 1-s-Ticker, solange der Flow offen ist */
+function elapsedA() {
+  return fmtTime(Math.floor((Date.now() - ui.flowA.startTs) / 1000));
+}
+
+function startElapsedTicker() {
+  stopElapsedTicker();
+  ui.elapsedInterval = setInterval(() => {
+    const span = el("aElapsed");
+    if (ui.flowA && span) span.textContent = elapsedA();
+  }, 1000);
+}
+
+function stopElapsedTicker() {
+  if (ui.elapsedInterval) { clearInterval(ui.elapsedInterval); ui.elapsedInterval = null; }
+}
+
 function startFlowA() {
   KBWake.on();
   const w = lastWeights("A") || { fs: DEFAULT_WEIGHT, cp: DEFAULT_WEIGHT, row: DEFAULT_WEIGHT };
@@ -722,6 +836,7 @@ function startFlowA() {
     weights: w,
     startTs: Date.now(),
   };
+  startElapsedTicker();
   renderFlowA();
 }
 
@@ -739,7 +854,7 @@ function renderFlowA() {
       return `
         <div class="ex-card${f.done[e.id] ? " is-done" : ""}">
           <div class="ex-top">
-            <button class="check" data-action="a-check" data-ex="${e.id}" aria-label="${ex.name} abhaken">${ICONS.check}</button>
+            <button class="check" data-action="a-check" data-ex="${e.id}" aria-pressed="${f.done[e.id]}" aria-label="${ex.name} abhaken">${ICONS.check}</button>
             <div class="grow">
               <div class="ex-name">${ex.name}</div>
               <div class="ex-sub">${variantText(e.id)}</div>
@@ -757,7 +872,7 @@ function renderFlowA() {
     .join("");
 
   openOverlay(`
-    ${ovHead("Workout A · Kraft", `Runde ${f.round} von ${WORKOUT_A.rounds}`)}
+    ${ovHead("Workout A · Kraft", `Runde ${f.round} von ${WORKOUT_A.rounds} · <span id="aElapsed">${elapsedA()}</span>`)}
     <div class="ov-body">
       <div class="rounds">${segs}</div>
       ${cards}
@@ -779,7 +894,7 @@ function completeRoundA() {
     finishWorkout({
       workout: "A",
       mode: "circuit",
-      minutes: 15,
+      startTs: f.startTs,
       weights: Object.assign({}, f.weights),
       title: "Workout A · Kraft",
       emoji: "💪",
@@ -791,7 +906,7 @@ function completeRoundA() {
 function renderRestA() {
   const f = ui.flowA;
   openOverlay(`
-    ${ovHead("Pause", `Runde ${f.round} von ${WORKOUT_A.rounds} geschafft`)}
+    ${ovHead("Pause", `Runde ${f.round} von ${WORKOUT_A.rounds} geschafft · <span id="aElapsed">${elapsedA()}</span>`)}
     <div class="timer-wrap">
       <div class="timer-ring is-rest" id="tRing">
         ${ringSvg()}
@@ -816,6 +931,7 @@ function renderRestA() {
     {
       onTick: (p, i, left) => updateRing(p.seconds, left),
       onDone: () => advanceRoundA(),
+      endSound: "phase", // Fanfare nur am Workout-Ende, nicht nach jeder Pause
     }
   );
 }
@@ -849,16 +965,16 @@ function renderFlowBSelect() {
   openOverlay(`
     ${ovHead("Workout B · Conditioning", "Swings + Thrusters")}
     <div class="ov-body">
-      <div class="mode-card${f.mode === "emom" ? " is-selected" : ""}" data-action="b-mode" data-mode="emom">
+      <button class="mode-card${f.mode === "emom" ? " is-selected" : ""}" data-action="b-mode" data-mode="emom" aria-pressed="${f.mode === "emom"}">
         <span class="radio"></span>
-        <h3>EMOM · ${WORKOUT_B.emom.minutes} Min</h3>
-        <p>„Every Minute On the Minute": Ungerade Minute → <strong>${WORKOUT_B.emom.swingReps} Swings</strong>, gerade Minute → <strong>${WORKOUT_B.emom.thrusterReps} Thrusters</strong>. Der Rest jeder Minute ist Pause.</p>
-      </div>
-      <div class="mode-card${f.mode === "interval" ? " is-selected" : ""}" data-action="b-mode" data-mode="interval">
+        <span class="mc-title">EMOM · ${WORKOUT_B.emom.minutes} Min</span>
+        <span class="mc-text">„Every Minute On the Minute": Ungerade Minute → <strong>${WORKOUT_B.emom.swingReps} Swings</strong>, gerade Minute → <strong>${WORKOUT_B.emom.thrusterReps} Thrusters</strong>. Der Rest jeder Minute ist Pause.</span>
+      </button>
+      <button class="mode-card${f.mode === "interval" ? " is-selected" : ""}" data-action="b-mode" data-mode="interval" aria-pressed="${f.mode === "interval"}">
         <span class="radio"></span>
-        <h3>Intervalle · ${iv.rounds} Runden</h3>
-        <p>${iv.swingWork} s Swings → ${iv.swingRest} s Pause → ${f.easier ? iv.easierWork : iv.thrusterWork} s Thrusters → ${f.easier ? iv.easierRest : iv.thrusterRest} s Pause.</p>
-      </div>
+        <span class="mc-title">Intervalle · ${iv.rounds} Runden</span>
+        <span class="mc-text">${iv.swingWork} s Swings → ${iv.swingRest} s Pause → ${f.easier ? iv.easierWork : iv.thrusterWork} s Thrusters → ${f.easier ? iv.easierRest : iv.thrusterRest} s Pause.</span>
+      </button>
       ${f.mode === "interval" ? `
         <div class="card">
           <div class="setting-row" style="padding:2px 0">
@@ -866,7 +982,7 @@ function renderFlowBSelect() {
               <div class="s-title">Leichter Modus</div>
               <div class="s-sub">Thrusters ${iv.easierWork} s Arbeit / ${iv.easierRest} s Pause — wenn ${iv.thrusterWork} s zu hart sind</div>
             </div>
-            <button class="switch ${f.easier ? "is-on" : ""}" data-action="b-easier" aria-label="Leichter Modus"></button>
+            <button class="switch ${f.easier ? "is-on" : ""}" data-action="b-easier" role="switch" aria-checked="${f.easier}" aria-label="Leichter Modus"></button>
           </div>
         </div>` : ""}
       <hr class="divider">
@@ -960,6 +1076,8 @@ function buildPhasesB() {
 
 function startTimerB() {
   const f = ui.flowB;
+  // Dauer ab Timer-Start messen — Zeit auf dem Auswahl-Screen zählt nicht
+  f.startTs = Date.now();
   const phases = buildPhasesB();
   const modeLabel = f.mode === "emom" ? "EMOM" : "Intervalle";
 
@@ -1016,11 +1134,10 @@ function startTimerB() {
     },
     onTick: (p, i, left) => updateRing(p.seconds, left),
     onDone: () => {
-      const minutes = f.mode === "emom" ? WORKOUT_B.emom.minutes : 14;
       finishWorkout({
         workout: "B",
         mode: f.mode,
-        minutes,
+        startTs: f.startTs,
         weights: Object.assign({}, f.weights),
         title: "Workout B · " + (f.mode === "emom" ? "EMOM" : "Intervalle"),
         emoji: "🔥",
@@ -1068,18 +1185,21 @@ function fmtTime(sec) {
 
 function finishWorkout(opts) {
   KBTimer.stop();
+  // Echte Dauer messen statt Planwert — gedeckelt, falls das Overlay
+  // versehentlich lange offen/pausiert blieb
+  const minutes = Math.max(1, Math.min(60, Math.round((Date.now() - opts.startTs) / 60000)));
   ui.pendingEntry = {
     date: fmtISO(new Date()),
     workout: opts.workout,
     mode: opts.mode,
-    minutes: opts.minutes,
+    minutes,
     weights: opts.weights,
     ts: Date.now(),
   };
 
   const cells = [
-    { v: "~" + opts.minutes + " Min", k: "Dauer" },
-    { v: "≈ " + kcalOf(opts.minutes), k: "kcal" },
+    { v: minutes + " Min", k: "Dauer" },
+    { v: "≈ " + kcalOf(minutes), k: "kcal" },
     ...opts.cells,
   ];
 
@@ -1150,6 +1270,26 @@ function confirmAbort() {
   });
 }
 
+/* X auf dem „Geschafft!"-Screen: Das Workout ist fertig, aber ungespeichert —
+   nicht den Abbruch-Dialog zeigen, sondern Speichern anbieten */
+function confirmDiscardFinished() {
+  showModal({
+    title: "Workout speichern?",
+    text: "Dein Workout ist abgeschlossen, aber noch nicht gespeichert.",
+    actions: [
+      { label: "Speichern & fertig", cls: "btn--primary", fn: () => { hideModal(); saveFinish(); } },
+      { label: "Verwerfen", cls: "btn--danger-ghost", fn: () => { hideModal(); closeOverlay(); switchTab("home"); } },
+    ],
+  });
+}
+
+/* Zentrale Schließen-Logik für das Overlay (X-Button und Escape) */
+function requestCloseOverlay() {
+  if (ui.pendingEntry) confirmDiscardFinished();
+  else if (ui.flowA || ui.flowB) confirmAbort();
+  else closeOverlay();
+}
+
 function chooseWorkoutModal() {
   showModal({
     title: "Workout wählen",
@@ -1184,9 +1324,7 @@ document.addEventListener("click", (ev) => {
       break;
 
     case "ov-close":
-      // Nur nachfragen, wenn ein Workout aktiv ist — sonst (z. B. Einstellungen) direkt schließen
-      if (ui.flowA || ui.flowB || ui.pendingEntry) confirmAbort();
-      else closeOverlay();
+      requestCloseOverlay();
       break;
 
     /* --- Workout A --- */
@@ -1197,6 +1335,7 @@ document.addEventListener("click", (ev) => {
       f.done[ex] = !f.done[ex];
       // Gezielt im DOM togglen statt neu rendern — sonst springt der Scroll
       // und die Technik-Videos starten von vorn
+      t.setAttribute("aria-pressed", String(f.done[ex]));
       t.closest(".ex-card").classList.toggle("is-done", f.done[ex]);
       const allDone = WORKOUT_A.exercises.every((e) => f.done[e.id]);
       const btn = $('#overlay [data-action="a-round"]');
@@ -1259,6 +1398,31 @@ document.addEventListener("click", (ev) => {
       ui.chartEx = t.dataset.ex;
       renderProgress();
       break;
+    case "history-entry": {
+      const idx = Number(t.dataset.idx);
+      const h = state.history[idx];
+      if (!h) break;
+      const d = parseISO(h.date).toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit" });
+      showModal({
+        title: `Workout ${h.workout} · ${d}`,
+        text: `${h.minutes} Min · ≈ ${kcalOf(h.minutes)} kcal — Eintrag löschen?`,
+        actions: [
+          { label: "Behalten", cls: "btn--primary", fn: hideModal },
+          {
+            label: "Eintrag löschen",
+            cls: "btn--danger-ghost",
+            fn: () => {
+              state.history.splice(idx, 1);
+              saveState();
+              hideModal();
+              renderProgress();
+              renderHome(); // Streak & Stats aktualisieren
+            },
+          },
+        ],
+      });
+      break;
+    }
 
     /* --- Einstellungen --- */
     case "open-settings":
@@ -1283,6 +1447,12 @@ document.addEventListener("click", (ev) => {
       renderSettingsOverlay();
       break;
     }
+    case "data-export":
+      exportData();
+      break;
+    case "data-import":
+      importDataPicker();
+      break;
     case "data-reset":
       showModal({
         title: "Alles zurücksetzen?",
@@ -1326,6 +1496,16 @@ document.addEventListener("visibilitychange", () => {
 /* Modal: Klick auf Backdrop schließt (außer es ist ein Abbruch-Dialog mit laufendem Timer — dann lieber explizit) */
 el("modal").addEventListener("click", (ev) => {
   if (ev.target === el("modal") && !KBTimer.isRunning()) hideModal();
+});
+
+/* Escape schließt Modal bzw. Overlay (Desktop-Komfort) */
+document.addEventListener("keydown", (ev) => {
+  if (ev.key !== "Escape") return;
+  if (!el("modal").hidden) {
+    if (!KBTimer.isRunning()) hideModal();
+    return;
+  }
+  if (!el("overlay").hidden) requestCloseOverlay();
 });
 
 /* ---------------- Init ---------------- */

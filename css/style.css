@@ -225,6 +225,19 @@ svg { display: block; }
 
 .btn svg { width: 18px; height: 18px; }
 
+/* Dezenter Text-Button (z. B. „Workout wählen" unterm Start-Button) */
+.btn-link {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px 0;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.btn-link:hover { color: var(--orange); }
+
 /* ---------- Wochenstreifen ---------- */
 
 .weekstrip {
@@ -572,11 +585,15 @@ svg { display: block; }
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
+  text-align: left;
   padding: 14px 16px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 18px;
   margin-bottom: 8px;
+  font-size: inherit;
+  line-height: inherit;
 }
 .history-item .h-icon {
   width: 42px;
@@ -590,8 +607,8 @@ svg { display: block; }
 }
 .history-item .h-icon.a { background: var(--orange-soft); color: var(--orange); }
 .history-item .h-icon.b { background: var(--blue-soft); color: #7C9BFF; }
-.history-item .h-title { font-size: 14.5px; font-weight: 700; }
-.history-item .h-sub { font-size: 12px; color: var(--text-3); margin-top: 1px; }
+.history-item .h-title { display: block; font-size: 14.5px; font-weight: 700; }
+.history-item .h-sub { display: block; font-size: 12px; color: var(--text-3); margin-top: 1px; }
 .history-item .h-min { margin-left: auto; text-align: right; flex-shrink: 0; font-size: 13px; font-weight: 700; color: var(--text-2); }
 
 .empty {
@@ -671,9 +688,12 @@ svg { display: block; }
 }
 .seg-control button.is-active { background: var(--orange); color: #16100B; }
 
-/* Modus-Auswahl-Karten (Workout B) */
+/* Modus-Auswahl-Karten (Workout B) — echte Buttons (Tastatur/Screenreader) */
 .mode-card {
   position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
   background: var(--card);
   border: 1.5px solid var(--line);
   border-radius: var(--radius);
@@ -682,8 +702,8 @@ svg { display: block; }
   transition: border-color 0.15s ease;
 }
 .mode-card.is-selected { border-color: var(--orange); background: var(--card-2); }
-.mode-card h3 { margin: 0 0 4px; font-size: 17px; font-weight: 800; }
-.mode-card p { margin: 0; font-size: 13px; color: var(--text-2); }
+.mode-card .mc-title { display: block; margin: 0 0 4px; font-size: 17px; font-weight: 800; }
+.mode-card .mc-text { display: block; margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-2); }
 .mode-card .radio {
   position: absolute;
   top: 18px;
