@@ -1,6 +1,6 @@
 /* Kettlebell 15 — Service Worker (Cache-First für eigene Assets) */
 
-const CACHE = "kb15-v9";
+const CACHE = "kb15-v10";
 
 const ASSETS = [
   "./",
@@ -13,6 +13,8 @@ const ASSETS = [
   "./icons/icon-512.png",
   "./icons/icon-512-maskable.png",
   "./videos/front-squat.mp4",
+  "./videos/clean-press.mp4",
+  "./videos/thruster.mp4",
 ];
 
 self.addEventListener("install", (ev) => {

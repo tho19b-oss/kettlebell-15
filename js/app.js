@@ -29,6 +29,7 @@ const EXERCISES = {
     name: "Clean & Press",
     de: "Umsetzen & Über-Kopf-Drücken",
     muscles: "Schultern, Trizeps, Rücken, Beine",
+    video: "videos/clean-press.mp4",
     oneBell: "Mit 1 Kettlebell: beidhändig ausführen oder die Seite bei jeder Runde wechseln.",
     tips: [
       "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
@@ -63,6 +64,7 @@ const EXERCISES = {
     name: "Thruster",
     de: "Front Squat + Schulterdrücken in einer Bewegung",
     muscles: "Ganzkörper: Beine, Schultern, Core + Herz-Kreislauf",
+    video: "videos/thruster.mp4",
     oneBell: "Mit 1 Kettlebell: beidhändig (Goblet-Position) oder einarmig mit Seitenwechsel.",
     tips: [
       "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen",
