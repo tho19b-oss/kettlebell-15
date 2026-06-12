@@ -18,7 +18,12 @@ const EXERCISES = {
     de: "Frontkniebeuge",
     muscles: "Beine, Gesäß, Core",
     video: "videos/front-squat.mp4",
-    oneBell: "Mit 1 Kettlebell: Goblet Squat — die Kettlebell mit beiden Händen vor der Brust halten.",
+    oneBell: {
+      name: "Goblet Squat",
+      sub: "Die Kettlebell mit beiden Händen vor der Brust halten",
+      perSide: false,
+      video: null,
+    },
     tips: [
       "Kettlebells in der Rack-Position an Brust/Unterarm ablegen, Ellbogen eng",
       "Brust aufrecht, Core fest — tief hocken, Fersen bleiben am Boden",
@@ -30,7 +35,12 @@ const EXERCISES = {
     de: "Umsetzen & Über-Kopf-Drücken",
     muscles: "Schultern, Trizeps, Rücken, Beine",
     video: "videos/clean-press.mp4",
-    oneBell: "Mit 1 Kettlebell: beidhändig ausführen oder die Seite bei jeder Runde wechseln.",
+    oneBell: {
+      name: "Clean & Press einarmig",
+      sub: "Seite bei jeder Runde oder Wiederholung wechseln",
+      perSide: true,
+      video: null,
+    },
     tips: [
       "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
       "Handgelenk gerade halten, nicht abknicken",
@@ -41,7 +51,12 @@ const EXERCISES = {
     name: "Row",
     de: "Vorgebeugtes Rudern",
     muscles: "Oberer Rücken, Lat, Bizeps",
-    oneBell: "Mit 1 Kettlebell: einarmig rudern, Seite bei jeder Runde wechseln.",
+    oneBell: {
+      name: "Rudern einarmig",
+      sub: "Freie Hand abstützen, Seite bei jeder Runde wechseln",
+      perSide: true,
+      video: null,
+    },
     tips: [
       "Hüfte nach hinten schieben, Rücken gerade — stabile Vorbeuge (Hip Hinge)",
       "Kettlebell Richtung Bauchnabel ziehen, Ellbogen nah am Körper",
@@ -52,7 +67,12 @@ const EXERCISES = {
     name: "Swing",
     de: "Kettlebell Swing",
     muscles: "Gesäß, Beinbeuger, unterer Rücken — die gesamte hintere Kette",
-    oneBell: "Mit 1 Kettlebell: beidhändig schwingen — der Standard für den Einstieg.",
+    oneBell: {
+      name: "Swing",
+      sub: "Beidhändig schwingen — der Standard für den Einstieg",
+      perSide: false,
+      video: null,
+    },
     tips: [
       "Die Kraft kommt aus der Hüftstreckung — kein Squat, die Arme bleiben locker",
       "Rücken immer gerade, Core fest — die Kettlebell schwingt bis ca. Brusthöhe",
@@ -65,7 +85,12 @@ const EXERCISES = {
     de: "Front Squat + Schulterdrücken in einer Bewegung",
     muscles: "Ganzkörper: Beine, Schultern, Core + Herz-Kreislauf",
     video: "videos/thruster.mp4",
-    oneBell: "Mit 1 Kettlebell: beidhändig (Goblet-Position) oder einarmig mit Seitenwechsel.",
+    oneBell: {
+      name: "Goblet Thruster",
+      sub: "Beidhändig in der Goblet-Position vor der Brust",
+      perSide: false,
+      video: null,
+    },
     tips: [
       "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen",
       "Eine flüssige Bewegung — nicht zwischendurch absetzen",
@@ -310,14 +335,26 @@ const $ = (sel, root) => (root || document).querySelector(sel);
 
 function el(id) { return document.getElementById(id); }
 
-function variantText(exId) {
-  return state.settings.bells === 1 ? EXERCISES[exId].oneBell : "Mit 2 Kettlebells ausführen";
+/* Übung passend zur Equipment-Einstellung: bei 1 Kettlebell wird die
+   oneBell-Variante übergelegt (eigener Name, Hinweis, "je Seite",
+   optional eigenes Video — sonst Fallback aufs Basis-Video). */
+function exFor(exId) {
+  const base = EXERCISES[exId];
+  if (state.settings.bells === 1 && base.oneBell) {
+    return Object.assign({}, base, {
+      name: base.oneBell.name,
+      sub: base.oneBell.sub,
+      perSide: !!base.oneBell.perSide,
+      video: base.oneBell.video || base.video,
+    });
+  }
+  return Object.assign({}, base, { sub: "Mit 2 Kettlebells ausführen", perSide: false });
 }
 
 /* Technik-Video als stummer Loop (verhält sich wie ein GIF, ist aber viel kleiner).
    Im Workout: Autoplay ohne Controls. Im Guide: mit Controls, Start per Tipp. */
 function exVideo(exId, opts) {
-  const src = EXERCISES[exId].video;
+  const src = exFor(exId).video;
   if (!src) return "";
   return (opts && opts.controls)
     ? `<video class="ex-video" src="${src}" controls muted loop playsinline preload="metadata"></video>`
@@ -354,12 +391,15 @@ function renderHome() {
   let hero;
   if (todays && doneToday.length === 0) {
     const isA = todays === "A";
+    const exNames = isA
+      ? WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(" · ")
+      : `${exFor("swing").name}s · ${exFor("thruster").name}s`;
     hero = `
       <div class="hero">
         <div class="eyebrow">Heute · Workout ${todays}</div>
         <h2>${isA ? "Kraft" : "Conditioning & Power"}</h2>
         <div class="meta-row">
-          <span>${ICONS.bell}${isA ? "Front Squat · Clean &amp; Press · Row" : "Swings · Thrusters"}</span>
+          <span>${ICONS.bell}${exNames}</span>
         </div>
         <div class="meta-row" style="margin-top:-10px">
           <span>${ICONS.clock}~15 Min</span>
@@ -458,7 +498,7 @@ function renderProgress() {
   /* Chart-Daten */
   const exIds = ["fs", "cp", "row", "swing", "thruster"];
   const chips = exIds
-    .map((id) => `<button class="chip-btn${ui.chartEx === id ? " is-active" : ""}" data-action="chart-ex" data-ex="${id}">${EXERCISES[id].name}</button>`)
+    .map((id) => `<button class="chip-btn${ui.chartEx === id ? " is-active" : ""}" data-action="chart-ex" data-ex="${id}">${exFor(id).name}</button>`)
     .join("");
 
   const points = state.history
@@ -518,7 +558,7 @@ function renderProgress() {
     <div class="card chart-card">
       <div class="chart-head">
         <div>
-          <div class="eyebrow">${EXERCISES[ui.chartEx].name}</div>
+          <div class="eyebrow">${exFor(ui.chartEx).name}</div>
           <div class="chart-val">${lastW != null ? lastW + ' <small>kg aktuell</small>' : '<small>keine Daten</small>'}</div>
         </div>
       </div>
@@ -627,19 +667,26 @@ function renderGuide() {
   const exCards = ["fs", "cp", "row", "swing", "thruster"]
     .map((id) => {
       const e = EXERCISES[id];
+      const v = exFor(id);
+      const oneActive = state.settings.bells === 1;
       const inA = WORKOUT_A.exercises.some((x) => x.id === id);
+      // Hinweis auf die jeweils andere Equipment-Variante — entfällt,
+      // wenn die Ausführung identisch ist (Swing)
+      const alt = oneActive
+        ? (v.name === e.name ? "" : `Mit 2 Kettlebells: ${e.name} — beide Kettlebells gleichzeitig.`)
+        : `Mit 1 Kettlebell: ${e.oneBell.name} — ${e.oneBell.sub}.`;
       return `
         <div class="card guide-card">
           <div class="row">
             <div class="grow">
-              <h3>${e.name}</h3>
-              <div class="g-sub">${e.de} · ${e.muscles}</div>
+              <h3>${v.name}</h3>
+              <div class="g-sub">${oneActive ? v.sub : e.de} · ${e.muscles}</div>
             </div>
             <span class="pill ${inA ? "pill--a" : "pill--b"}">${inA ? "Workout A" : "Workout B"}</span>
           </div>
           ${exVideo(id, { controls: true })}
           <ul>${e.tips.map((t) => `<li>${t}</li>`).join("")}</ul>
-          <div class="g-alt">${e.oneBell}</div>
+          ${alt ? `<div class="g-alt">${alt}</div>` : ""}
         </div>`;
     })
     .join("");
@@ -654,8 +701,8 @@ function renderGuide() {
       <h3>So funktioniert der Plan</h3>
       <ul>
         <li><strong>Mo / Mi / Fr</strong> — 15 Minuten, zwei Workouts im Wechsel</li>
-        <li><strong>Workout A (Kraft):</strong> Zirkel ×3 — Front Squat, Clean &amp; Press, Row, danach 90 s Pause</li>
-        <li><strong>Workout B (Conditioning):</strong> Swings + Thrusters — als EMOM oder Intervalle</li>
+        <li><strong>Workout A (Kraft):</strong> Zirkel ×3 — ${WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(", ")}, danach 90 s Pause</li>
+        <li><strong>Workout B (Conditioning):</strong> ${exFor("swing").name}s + ${exFor("thruster").name}s — als EMOM oder Intervalle</li>
         <li><strong>2-Wochen-Rotation:</strong> Woche 1 = A·B·A, Woche 2 = B·A·B — so machst du jedes Workout 3× in 2 Wochen</li>
         <li><strong>Di / Do / Sa / So sind Ruhetage:</strong> mind. 24 h, ideal 48 h Pause — Muskeln wachsen in der Erholung</li>
       </ul>
@@ -852,16 +899,16 @@ function renderFlowA() {
 
   const cards = WORKOUT_A.exercises
     .map((e) => {
-      const ex = EXERCISES[e.id];
+      const ex = exFor(e.id);
       return `
         <div class="ex-card${f.done[e.id] ? " is-done" : ""}">
           <div class="ex-top">
             <button class="check" data-action="a-check" data-ex="${e.id}" aria-pressed="${f.done[e.id]}" aria-label="${ex.name} abhaken">${ICONS.check}</button>
             <div class="grow">
               <div class="ex-name">${ex.name}</div>
-              <div class="ex-sub">${variantText(e.id)}</div>
+              <div class="ex-sub">${ex.sub}</div>
             </div>
-            <div class="ex-reps"><div class="n">${e.reps}</div><div class="l">Wdh.</div></div>
+            <div class="ex-reps"><div class="n">${e.reps}</div><div class="l">${ex.perSide ? "je Seite" : "Wdh."}</div></div>
           </div>
           ${exVideo(e.id)}
           <div class="stepper">
@@ -900,7 +947,7 @@ function completeRoundA() {
       weights: Object.assign({}, f.weights),
       title: "Workout A · Kraft",
       emoji: "💪",
-      cells: WORKOUT_A.exercises.map((e) => ({ v: f.weights[e.id] + " kg", k: EXERCISES[e.id].name })),
+      cells: WORKOUT_A.exercises.map((e) => ({ v: f.weights[e.id] + " kg", k: exFor(e.id).name })),
     });
   }
 }
@@ -921,7 +968,7 @@ function renderRestA() {
         <div class="name">Durchatmen 😮‍💨</div>
         <div class="target">Gleich geht's weiter mit Runde ${f.round + 1}</div>
       </div>
-      <div class="t-next">Als Nächstes: <strong>Front Squat · Clean &amp; Press · Row</strong></div>
+      <div class="t-next">Als Nächstes: <strong>${WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(" · ")}</strong></div>
       <div class="t-controls">
         <button class="btn btn--ghost" data-action="rest-skip">Pause überspringen</button>
       </div>
@@ -963,26 +1010,28 @@ function startFlowB() {
 function renderFlowBSelect() {
   const f = ui.flowB;
   const iv = WORKOUT_B.interval;
+  const swEx = exFor("swing");
+  const thEx = exFor("thruster");
 
   openOverlay(`
-    ${ovHead("Workout B · Conditioning", "Swings + Thrusters")}
+    ${ovHead("Workout B · Conditioning", `${swEx.name}s + ${thEx.name}s`)}
     <div class="ov-body">
       <button class="mode-card${f.mode === "emom" ? " is-selected" : ""}" data-action="b-mode" data-mode="emom" aria-pressed="${f.mode === "emom"}">
         <span class="radio"></span>
         <span class="mc-title">EMOM · ${WORKOUT_B.emom.minutes} Min</span>
-        <span class="mc-text">„Every Minute On the Minute": Ungerade Minute → <strong>${WORKOUT_B.emom.swingReps} Swings</strong>, gerade Minute → <strong>${WORKOUT_B.emom.thrusterReps} Thrusters</strong>. Der Rest jeder Minute ist Pause.</span>
+        <span class="mc-text">„Every Minute On the Minute": Ungerade Minute → <strong>${WORKOUT_B.emom.swingReps} ${swEx.name}s</strong>, gerade Minute → <strong>${WORKOUT_B.emom.thrusterReps} ${thEx.name}s</strong>. Der Rest jeder Minute ist Pause.</span>
       </button>
       <button class="mode-card${f.mode === "interval" ? " is-selected" : ""}" data-action="b-mode" data-mode="interval" aria-pressed="${f.mode === "interval"}">
         <span class="radio"></span>
         <span class="mc-title">Intervalle · ${iv.rounds} Runden</span>
-        <span class="mc-text">${iv.swingWork} s Swings → ${iv.swingRest} s Pause → ${f.easier ? iv.easierWork : iv.thrusterWork} s Thrusters → ${f.easier ? iv.easierRest : iv.thrusterRest} s Pause.</span>
+        <span class="mc-text">${iv.swingWork} s ${swEx.name}s → ${iv.swingRest} s Pause → ${f.easier ? iv.easierWork : iv.thrusterWork} s ${thEx.name}s → ${f.easier ? iv.easierRest : iv.thrusterRest} s Pause.</span>
       </button>
       ${f.mode === "interval" ? `
         <div class="card">
           <div class="setting-row" style="padding:2px 0">
             <div class="grow">
               <div class="s-title">Leichter Modus</div>
-              <div class="s-sub">Thrusters ${iv.easierWork} s Arbeit / ${iv.easierRest} s Pause — wenn ${iv.thrusterWork} s zu hart sind</div>
+              <div class="s-sub">${thEx.name}s ${iv.easierWork} s Arbeit / ${iv.easierRest} s Pause — wenn ${iv.thrusterWork} s zu hart sind</div>
             </div>
             <button class="switch ${f.easier ? "is-on" : ""}" data-action="b-easier" role="switch" aria-checked="${f.easier}" aria-label="Leichter Modus"></button>
           </div>
@@ -991,8 +1040,8 @@ function renderFlowBSelect() {
       <div class="ex-card">
         <div class="ex-top">
           <div class="grow">
-            <div class="ex-name">Swing</div>
-            <div class="ex-sub">${variantText("swing")}</div>
+            <div class="ex-name">${swEx.name}</div>
+            <div class="ex-sub">${swEx.sub}</div>
           </div>
         </div>
         ${exVideo("swing")}
@@ -1005,8 +1054,8 @@ function renderFlowBSelect() {
       <div class="ex-card">
         <div class="ex-top">
           <div class="grow">
-            <div class="ex-name">Thruster</div>
-            <div class="ex-sub">${variantText("thruster")}</div>
+            <div class="ex-name">${thEx.name}</div>
+            <div class="ex-sub">${thEx.sub}</div>
           </div>
         </div>
         ${exVideo("thruster")}
@@ -1025,6 +1074,8 @@ function renderFlowBSelect() {
 
 function buildPhasesB() {
   const f = ui.flowB;
+  const swEx = exFor("swing");
+  const thEx = exFor("thruster");
   const phases = [];
 
   if (f.mode === "emom") {
@@ -1036,10 +1087,10 @@ function buildPhasesB() {
         type: "work",
         ex: isSwing ? "swing" : "thruster",
         label: `Minute ${i}/${m.minutes}`,
-        exName: isSwing ? "Swings" : "Thrusters",
+        exName: isSwing ? swEx.name + "s" : thEx.name + "s",
         target: `${isSwing ? m.swingReps : m.thrusterReps} Wiederholungen · ${f.weights[isSwing ? "swing" : "thruster"]} kg`,
         hint: "…dann Pause bis zur nächsten Minute",
-        next: i < m.minutes ? (isSwing ? `Thrusters ${m.thrusterReps}` : `Swings ${m.swingReps}`) : "Fertig 🎉",
+        next: i < m.minutes ? (isSwing ? `${thEx.name}s ${m.thrusterReps}` : `${swEx.name}s ${m.swingReps}`) : "Fertig 🎉",
       });
     }
   } else {
@@ -1049,7 +1100,7 @@ function buildPhasesB() {
     for (let r = 1; r <= iv.rounds; r++) {
       phases.push({
         seconds: iv.swingWork, type: "work", ex: "swing",
-        label: `Runde ${r}/${iv.rounds}`, exName: "Swings",
+        label: `Runde ${r}/${iv.rounds}`, exName: swEx.name + "s",
         target: `${iv.swingWork} s Vollgas · ${f.weights.swing} kg`,
         next: `${iv.swingRest} s Pause`,
       });
@@ -1057,11 +1108,11 @@ function buildPhasesB() {
         seconds: iv.swingRest, type: "rest", ex: null,
         label: `Runde ${r}/${iv.rounds}`, exName: "Pause",
         target: "Locker bleiben, Atmung kontrollieren",
-        next: `Thrusters ${tWork} s`,
+        next: `${thEx.name}s ${tWork} s`,
       });
       phases.push({
         seconds: tWork, type: "work", ex: "thruster",
-        label: `Runde ${r}/${iv.rounds}`, exName: "Thrusters",
+        label: `Runde ${r}/${iv.rounds}`, exName: thEx.name + "s",
         target: `${tWork} s Vollgas · ${f.weights.thruster} kg`,
         next: `${tRest} s Pause`,
       });
@@ -1069,7 +1120,7 @@ function buildPhasesB() {
         seconds: tRest, type: "rest", ex: null,
         label: `Runde ${r}/${iv.rounds}`, exName: "Pause",
         target: "Locker bleiben, Atmung kontrollieren",
-        next: r < iv.rounds ? `Swings ${iv.swingWork} s` : "Fertig 🎉",
+        next: r < iv.rounds ? `${swEx.name}s ${iv.swingWork} s` : "Fertig 🎉",
       });
     }
   }
@@ -1082,9 +1133,11 @@ function startTimerB() {
   f.startTs = Date.now();
   const phases = buildPhasesB();
   const modeLabel = f.mode === "emom" ? "EMOM" : "Intervalle";
+  const swEx = exFor("swing");
+  const thEx = exFor("thruster");
 
   openOverlay(`
-    ${ovHead("Workout B · " + modeLabel, "Swings + Thrusters")}
+    ${ovHead("Workout B · " + modeLabel, `${swEx.name}s + ${thEx.name}s`)}
     <div class="timer-wrap">
       <div class="eyebrow" id="tLabel"></div>
       <div class="timer-ring" id="tRing">
@@ -1119,7 +1172,7 @@ function startTimerB() {
       // Technik-Loop zur aktuellen Übung (falls ein Clip hinterlegt ist)
       const tv = el("tVideo");
       if (tv) {
-        const src = p.ex && EXERCISES[p.ex].video;
+        const src = p.ex && exFor(p.ex).video;
         if (src) {
           if (!tv.src.endsWith(src)) tv.src = src;
           tv.hidden = false;
@@ -1144,8 +1197,8 @@ function startTimerB() {
         title: "Workout B · " + (f.mode === "emom" ? "EMOM" : "Intervalle"),
         emoji: "🔥",
         cells: [
-          { v: f.weights.swing + " kg", k: "Swing" },
-          { v: f.weights.thruster + " kg", k: "Thruster" },
+          { v: f.weights.swing + " kg", k: swEx.name },
+          { v: f.weights.thruster + " kg", k: thEx.name },
         ],
       });
     },
@@ -1434,6 +1487,7 @@ document.addEventListener("click", (ev) => {
       state.settings.bells = Number(t.dataset.n);
       saveState();
       renderSettingsOverlay();
+      renderHome(); // Hero nennt Übungsnamen — sichtbaren Screen hinterm Overlay aktualisieren
       break;
     case "set-sound":
       state.settings.sound = !state.settings.sound;

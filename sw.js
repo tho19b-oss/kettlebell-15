@@ -1,6 +1,6 @@
 /* Kettlebell 15 — Service Worker (Cache-First für eigene Assets) */
 
-const CACHE = "kb15-v10";
+const CACHE = "kb15-v11";
 
 const ASSETS = [
   "./",
