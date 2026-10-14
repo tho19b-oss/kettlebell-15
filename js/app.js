@@ -22,7 +22,7 @@ const EXERCISES = {
       name: "Goblet Squat",
       sub: "Die Kettlebell mit beiden Händen vor der Brust halten",
       perSide: false,
-      video: null,
+      video: "videos/goblet-squat.mp4",
     },
     tips: [
       "Kettlebells in der Rack-Position an Brust/Unterarm ablegen, Ellbogen eng",
@@ -39,7 +39,7 @@ const EXERCISES = {
       name: "Clean & Press einarmig",
       sub: "Seite bei jeder Runde oder Wiederholung wechseln",
       perSide: true,
-      video: null,
+      video: "videos/clean-press-1kb.mp4",
     },
     tips: [
       "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
@@ -51,11 +51,12 @@ const EXERCISES = {
     name: "Row",
     de: "Vorgebeugtes Rudern",
     muscles: "Oberer Rücken, Lat, Bizeps",
+    video: "videos/row.mp4",
     oneBell: {
       name: "Rudern einarmig",
       sub: "Freie Hand abstützen, Seite bei jeder Runde wechseln",
       perSide: true,
-      video: null,
+      video: "videos/row-1kb.mp4",
     },
     tips: [
       "Hüfte nach hinten schieben, Rücken gerade — stabile Vorbeuge (Hip Hinge)",
@@ -67,6 +68,7 @@ const EXERCISES = {
     name: "Swing",
     de: "Kettlebell Swing",
     muscles: "Gesäß, Beinbeuger, unterer Rücken — die gesamte hintere Kette",
+    video: "videos/swing.mp4",
     oneBell: {
       name: "Swing",
       sub: "Beidhändig schwingen — der Standard für den Einstieg",
@@ -89,7 +91,7 @@ const EXERCISES = {
       name: "Goblet Thruster",
       sub: "Beidhändig in der Goblet-Position vor der Brust",
       perSide: false,
-      video: null,
+      video: "videos/goblet-thruster.mp4",
     },
     tips: [
       "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen",

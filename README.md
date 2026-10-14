@@ -58,11 +58,16 @@ Die App läuft danach wie eine native App im Vollbild — auch offline.
 
 ## Technik-Videos hinzufügen
 
-Kurze Clips (~10 s, hochkant 9:16, MP4/H.264) zeigen die saubere Ausführung als Loop.
+Kurze, nahtlose Loops (2–6 s, hochkant 9:16, 720×1280, MP4/H.264 ohne Ton) zeigen die saubere
+Ausführung. Für jede Übung gibt es eine Version mit 2 Kettlebells und – wo sie sich unterscheidet –
+eine Variante mit 1 Kettlebell. Wie die Clips mit KI erzeugt wurden, steht in
+[`videos/PROMPTS.md`](videos/PROMPTS.md).
+
 So kommt ein neuer Clip für eine Übung dazu:
 
 1. Datei nach `videos/` legen, z. B. `videos/swing.mp4`
-2. In `js/app.js` bei der Übung eintragen: `video: "videos/swing.mp4"`
+2. In `js/app.js` bei der Übung eintragen: `video: "videos/swing.mp4"` – für die Variante mit
+   1 Kettlebell unter `oneBell.video` (bleibt es `null`, wird das normale Video gezeigt)
 3. In `sw.js` den Pfad zu `ASSETS` hinzufügen und die `CACHE`-Version hochzählen
 
 Der Clip erscheint dann automatisch in der Workout-Karte, im Guide und beim
