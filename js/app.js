@@ -23,6 +23,12 @@ const EXERCISES = {
       sub: "Die Kettlebell mit beiden Händen vor der Brust halten",
       perSide: false,
       video: "videos/goblet-squat.mp4",
+      tips: [
+        "Kettlebell an den Griffhörnern greifen und eng vor der Brust halten",
+        "Brust aufrecht, Core fest — in der Hocke wandern die Ellbogen zwischen die Knie",
+        "Tief hocken, bis die Oberschenkel waagerecht sind — Fersen bleiben am Boden",
+        "Aus den Fersen kraftvoll wieder hochdrücken",
+      ],
     },
     tips: [
       "Kettlebells in der Rack-Position an Brust/Unterarm ablegen, Ellbogen eng",
@@ -40,6 +46,12 @@ const EXERCISES = {
       sub: "Seite bei jeder Runde oder Wiederholung wechseln",
       perSide: true,
       video: "videos/clean-press-1kb.mp4",
+      tips: [
+        "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
+        "Press: Körperspannung aufbauen und kontrolliert über Kopf drücken — der Oberkörper kippt nicht zur Seite",
+        "Freie Hand zur Balance seitlich ausstrecken, Handgelenk der Arbeitshand gerade halten",
+        "Seite wechseln — beide Arme gleich oft, die Wiederholungen gelten je Seite",
+      ],
     },
     tips: [
       "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
@@ -57,6 +69,12 @@ const EXERCISES = {
       sub: "Freie Hand abstützen, Seite bei jeder Runde wechseln",
       perSide: true,
       video: "videos/row-1kb.mp4",
+      tips: [
+        "Versetzter Stand: Fuß der freien Seite vorn, Hüfte nach hinten, Rücken gerade",
+        "Freie Hand auf dem vorderen Oberschenkel abstützen",
+        "Kettlebell Richtung Hüfte ziehen, Ellbogen nah am Körper — der Oberkörper dreht nicht mit auf",
+        "Schulterblatt bewusst zusammenziehen, langsam absenken — dann Seite wechseln",
+      ],
     },
     tips: [
       "Hüfte nach hinten schieben, Rücken gerade — stabile Vorbeuge (Hip Hinge)",
@@ -92,6 +110,12 @@ const EXERCISES = {
       sub: "Beidhändig in der Goblet-Position vor der Brust",
       perSide: false,
       video: "videos/goblet-thruster.mp4",
+      tips: [
+        "Beide Hände an den Griffhörnern, Kettlebell eng vor der Brust — wie beim Goblet Squat",
+        "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen — eine fließende Bewegung",
+        "Oben Arme ganz strecken, Core fest — kein Hohlkreuz",
+        "Sehr fordernd — unbedingt leicht anfangen und langsam steigern",
+      ],
     },
     tips: [
       "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen",
@@ -339,7 +363,7 @@ function el(id) { return document.getElementById(id); }
 
 /* Übung passend zur Equipment-Einstellung: bei 1 Kettlebell wird die
    oneBell-Variante übergelegt (eigener Name, Hinweis, "je Seite",
-   optional eigenes Video — sonst Fallback aufs Basis-Video). */
+   optional eigenes Video und eigene Tipps — sonst Fallback auf die Basis). */
 function exFor(exId) {
   const base = EXERCISES[exId];
   if (state.settings.bells === 1 && base.oneBell) {
@@ -348,6 +372,7 @@ function exFor(exId) {
       sub: base.oneBell.sub,
       perSide: !!base.oneBell.perSide,
       video: base.oneBell.video || base.video,
+      tips: base.oneBell.tips || base.tips,
     });
   }
   return Object.assign({}, base, { sub: "Mit 2 Kettlebells ausführen", perSide: false });
@@ -687,7 +712,7 @@ function renderGuide() {
             <span class="pill ${inA ? "pill--a" : "pill--b"}">${inA ? "Workout A" : "Workout B"}</span>
           </div>
           ${exVideo(id, { controls: true })}
-          <ul>${e.tips.map((t) => `<li>${t}</li>`).join("")}</ul>
+          <ul>${v.tips.map((t) => `<li>${t}</li>`).join("")}</ul>
           ${alt ? `<div class="g-alt">${alt}</div>` : ""}
         </div>`;
     })
