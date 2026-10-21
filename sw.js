@@ -1,6 +1,6 @@
 /* Kettlebell 15 — Service Worker (Cache-First für eigene Assets) */
 
-const CACHE = "kb15-v13";
+const CACHE = "kb15-v14";
 
 const ASSETS = [
   "./",
@@ -8,6 +8,12 @@ const ASSETS = [
   "./css/style.css",
   "./js/app.js",
   "./js/timer.js",
+  "./fonts/barlow-500.woff2",
+  "./fonts/barlow-600.woff2",
+  "./fonts/barlow-700.woff2",
+  "./fonts/barlow-condensed-600.woff2",
+  "./fonts/barlow-condensed-700.woff2",
+  "./fonts/barlow-condensed-800.woff2",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

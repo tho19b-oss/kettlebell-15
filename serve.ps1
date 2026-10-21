@@ -13,6 +13,7 @@ $mime = @{
   ".mp4"         = "video/mp4"
   ".svg"         = "image/svg+xml"
   ".ico"         = "image/x-icon"
+  ".woff2"       = "font/woff2"
   ".md"          = "text/plain; charset=utf-8"
 }
 

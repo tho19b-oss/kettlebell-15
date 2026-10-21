@@ -25,14 +25,14 @@ const EXERCISES = {
       video: "videos/goblet-squat.mp4",
       tips: [
         "Kettlebell an den Griffhörnern greifen und eng vor der Brust halten",
-        "Brust aufrecht, Core fest — in der Hocke wandern die Ellbogen zwischen die Knie",
-        "Tief hocken, bis die Oberschenkel waagerecht sind — Fersen bleiben am Boden",
+        "Brust aufrecht, Core fest. In der Hocke wandern die Ellbogen zwischen die Knie",
+        "Tief hocken, bis die Oberschenkel waagerecht sind, Fersen bleiben am Boden",
         "Aus den Fersen kraftvoll wieder hochdrücken",
       ],
     },
     tips: [
       "Kettlebells in der Rack-Position an Brust/Unterarm ablegen, Ellbogen eng",
-      "Brust aufrecht, Core fest — tief hocken, Fersen bleiben am Boden",
+      "Brust aufrecht, Core fest, tief hocken, Fersen bleiben am Boden",
       "Aus den Fersen kraftvoll wieder hochdrücken",
     ],
   },
@@ -47,14 +47,14 @@ const EXERCISES = {
       perSide: true,
       video: "videos/clean-press-1kb.mp4",
       tips: [
-        "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
-        "Press: Körperspannung aufbauen und kontrolliert über Kopf drücken — der Oberkörper kippt nicht zur Seite",
+        "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen. Sie soll sanft am Unterarm landen",
+        "Press: Körperspannung aufbauen und kontrolliert über Kopf drücken. Der Oberkörper kippt nicht zur Seite",
         "Freie Hand zur Balance seitlich ausstrecken, Handgelenk der Arbeitshand gerade halten",
-        "Seite wechseln — beide Arme gleich oft, die Wiederholungen gelten je Seite",
+        "Seite wechseln: beide Arme gleich oft, die Wiederholungen gelten je Seite",
       ],
     },
     tips: [
-      "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen — sie soll sanft am Unterarm landen",
+      "Clean: Kettlebell mit Hüftschwung in die Rack-Position bringen. Sie soll sanft am Unterarm landen",
       "Handgelenk gerade halten, nicht abknicken",
       "Press: Körperspannung aufbauen und kontrolliert über Kopf drücken, langsam absenken",
     ],
@@ -72,12 +72,12 @@ const EXERCISES = {
       tips: [
         "Versetzter Stand: Fuß der freien Seite vorn, Hüfte nach hinten, Rücken gerade",
         "Freie Hand auf dem vorderen Oberschenkel abstützen",
-        "Kettlebell Richtung Hüfte ziehen, Ellbogen nah am Körper — der Oberkörper dreht nicht mit auf",
-        "Schulterblatt bewusst zusammenziehen, langsam absenken — dann Seite wechseln",
+        "Kettlebell Richtung Hüfte ziehen, Ellbogen nah am Körper. Der Oberkörper dreht nicht mit auf",
+        "Schulterblatt bewusst zusammenziehen, langsam absenken, dann Seite wechseln",
       ],
     },
     tips: [
-      "Hüfte nach hinten schieben, Rücken gerade — stabile Vorbeuge (Hip Hinge)",
+      "Hüfte nach hinten schieben, Rücken gerade: stabile Vorbeuge (Hip Hinge)",
       "Kettlebell Richtung Bauchnabel ziehen, Ellbogen nah am Körper",
       "Schulterblatt bewusst zusammenziehen, dann langsam absenken",
     ],
@@ -85,18 +85,18 @@ const EXERCISES = {
   swing: {
     name: "Swing",
     de: "Kettlebell Swing",
-    muscles: "Gesäß, Beinbeuger, unterer Rücken — die gesamte hintere Kette",
+    muscles: "Gesäß, Beinbeuger, unterer Rücken: die gesamte hintere Kette",
     video: "videos/swing.mp4",
     oneBell: {
       name: "Swing",
-      sub: "Beidhändig schwingen — der Standard für den Einstieg",
+      sub: "Beidhändig schwingen, der Standard für den Einstieg",
       perSide: false,
       video: null,
     },
     tips: [
-      "Die Kraft kommt aus der Hüftstreckung — kein Squat, die Arme bleiben locker",
-      "Rücken immer gerade, Core fest — die Kettlebell schwingt bis ca. Brusthöhe",
-      "Einsteiger: leicht starten (6–8 kg) und langsam steigern — nicht hetzen!",
+      "Die Kraft kommt aus der Hüftstreckung, kein Squat, die Arme bleiben locker",
+      "Rücken immer gerade, Core fest, die Kettlebell schwingt bis ca. Brusthöhe",
+      "Einsteiger: leicht starten (6–8 kg) und langsam steigern, nicht hetzen!",
       "Stärkt unteren Rücken & Gesäß und kann Rückenschmerzen vorbeugen",
     ],
   },
@@ -111,17 +111,17 @@ const EXERCISES = {
       perSide: false,
       video: "videos/goblet-thruster.mp4",
       tips: [
-        "Beide Hände an den Griffhörnern, Kettlebell eng vor der Brust — wie beim Goblet Squat",
-        "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen — eine fließende Bewegung",
-        "Oben Arme ganz strecken, Core fest — kein Hohlkreuz",
-        "Sehr fordernd — unbedingt leicht anfangen und langsam steigern",
+        "Beide Hände an den Griffhörnern, Kettlebell eng vor der Brust, wie beim Goblet Squat",
+        "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen: eine fließende Bewegung",
+        "Oben Arme ganz strecken, Core fest, kein Hohlkreuz",
+        "Sehr fordernd: unbedingt leicht anfangen und langsam steigern",
       ],
     },
     tips: [
       "Aus der tiefen Hocke den Schwung direkt ins Über-Kopf-Drücken mitnehmen",
-      "Eine flüssige Bewegung — nicht zwischendurch absetzen",
+      "Eine flüssige Bewegung, nicht zwischendurch absetzen",
       "Laut Video „die vielleicht beste Übung der Welt“: Kraft, Power, Balance, Mobilität und Cardio in einem",
-      "Sehr fordernd — unbedingt leicht anfangen und langsam steigern",
+      "Sehr fordernd: unbedingt leicht anfangen und langsam steigern",
     ],
   },
 };
@@ -144,6 +144,15 @@ const WORKOUT_B = {
   emom: { minutes: 14, swingReps: "15–20", thrusterReps: "5–6" },
   interval: { rounds: 7, swingWork: 30, swingRest: 30, thrusterWork: 20, thrusterRest: 40, easierWork: 15, easierRest: 45 },
 };
+
+/* Wettkampf-Farbcode der Kettlebells. Zwischengewichte bekommen eine
+   hellere Stufe der nächsten Farbe, unter 8 kg und ab 36 kg Eisengrau/Weiß. */
+const KG_COLORS = {
+  8: "#F06EAA", 10: "#8EC2F2", 12: "#2F7DE1", 14: "#F7E36A", 16: "#F5D000",
+  18: "#B794E8", 20: "#8E5BD0", 22: "#6BC78A", 24: "#2DAA5C", 26: "#F5AE5E",
+  28: "#F28C28", 30: "#EE7A6A", 32: "#E2412E",
+};
+const KG_LEGEND = [8, 10, 12, 16, 20, 24, 28, 32];
 
 const TRAINING_DAYS = [1, 3, 5]; // Mo, Mi, Fr
 const KCAL_PER_MIN = 9;
@@ -390,12 +399,33 @@ function exVideo(exId, opts) {
 
 function kcalOf(min) { return Math.round(min * KCAL_PER_MIN); }
 
-function greeting() {
-  const h = new Date().getHours();
-  if (h < 5) return "Noch wach? 🌙";
-  if (h < 11) return "Guten Morgen ☀️";
-  if (h < 18) return "Hallo! 👋";
-  return "Guten Abend 🌙";
+function kgColor(kg) {
+  if (kg < 8) return "#A7A8A4";
+  if (kg > 32) return kg >= 40 ? "#F4F4F2" : "#C9CAC6";
+  return KG_COLORS[Math.round(kg / 2) * 2] || "#A7A8A4";
+}
+
+/* Schrift auf dem Punkt: dunkel oder hell, je nachdem was mehr Kontrast gibt */
+function kgInk(hex) {
+  const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+  const n = parseInt(hex.slice(1), 16);
+  const L = 0.2126 * lin(n >> 16) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
+  return (L + 0.05) / 0.058 >= 0.955 / (L + 0.05) ? "#161616" : "#F4F4F2";
+}
+
+function kgVars(kg) {
+  const c = kgColor(kg);
+  return `--kg:${c};--kg-ink:${kgInk(c)}`;
+}
+
+/* Gewichtspunkt im Wettkampf-Farbcode; size: "sm" | "md" | "lg" | "" */
+function kgDot(kg, size) {
+  return `<span class="kg${size ? " kg--" + size : ""}" style="${kgVars(kg)}" role="img" aria-label="${kg} kg">${kg}</span>`;
+}
+
+function maxWeight(entry) {
+  const ws = entry && entry.weights ? Object.values(entry.weights).filter((w) => w != null) : [];
+  return ws.length ? Math.max(...ws) : null;
 }
 
 /* Nutzer mit „Bewegung reduzieren" bekommen Standbilder statt Auto-Loops */
@@ -415,53 +445,52 @@ function renderHome() {
 
   const dateLabel = today.toLocaleDateString("de-DE", { weekday: "long", day: "numeric", month: "long" });
 
+  const nextLine = (next) => next ? ` Nächstes Training: <strong>${next.day}, Workout ${next.workout}</strong>.` : "";
+  const title = (t) => `<h1 class="today-title${t.length > 8 ? " today-title--long" : ""}">${t}</h1>`;
+
   let hero;
   if (todays && doneToday.length === 0) {
     const isA = todays === "A";
-    const exNames = isA
-      ? WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(" · ")
-      : `${exFor("swing").name}s · ${exFor("thruster").name}s`;
+    const w = lastWeights(todays) || {};
+    const rows = isA
+      ? WORKOUT_A.exercises.map((e) => ({ id: e.id, reps: e.reps, unit: exFor(e.id).perSide ? "je Seite" : "Wdh." }))
+      : [
+          { id: "swing", reps: WORKOUT_B.emom.swingReps, unit: "Wdh. EMOM" },
+          { id: "thruster", reps: WORKOUT_B.emom.thrusterReps, unit: "Wdh. EMOM" },
+        ];
     hero = `
-      <div class="hero">
-        <div class="eyebrow">Heute · Workout ${todays}</div>
-        <h2>${isA ? "Kraft" : "Conditioning & Power"}</h2>
-        <div class="meta-row">
-          <span>${ICONS.bell}${exNames}</span>
-        </div>
-        <div class="meta-row" style="margin-top:-10px">
-          <span>${ICONS.clock}~15 Min</span>
-          <span>${ICONS.bolt}${isA ? "3 Runden Zirkel" : "EMOM oder Intervalle"}</span>
-        </div>
+      <section class="today" aria-label="Heutiges Workout">
+        ${title(isA ? "Kraft" : "Conditioning & Power")}
+        <p class="today-meta"><strong>Workout ${todays}</strong> · ${isA ? "3 Runden Zirkel, 90 s Pause" : "EMOM oder Intervalle"} · ca. 15 Min</p>
+        ${bellList(rows, w)}
         <button class="btn btn--primary" data-action="start-workout" data-w="${todays}">${ICONS.play} Workout starten</button>
         <button class="btn-link" data-action="choose-workout">Lieber tauschen? Workout wählen</button>
-      </div>`;
+      </section>`;
   } else if (todays && doneToday.length > 0) {
-    const next = nextTrainingInfo(today);
     // Falls getauscht wurde, das tatsächlich absolvierte Workout nennen
-    const doneW = doneToday.some((h) => h.workout === todays) ? todays : doneToday[doneToday.length - 1].workout;
+    const last = doneToday[doneToday.length - 1];
+    const doneW = doneToday.some((h) => h.workout === todays) ? todays : last.workout;
     hero = `
-      <div class="hero hero--done">
-        <div class="eyebrow">Erledigt</div>
-        <h2>Stark! 💪</h2>
-        <p>Workout ${doneW} ist im Kasten.${next ? ` Nächstes Training: <strong>${next.day} · Workout ${next.workout}</strong>.` : ""}</p>
+      <section class="today" aria-label="Heute erledigt">
+        ${title("Erledigt")}
+        <p class="today-meta">Workout ${doneW} ist im Kasten: ${last.minutes} Min.${nextLine(nextTrainingInfo(today))}</p>
+        ${loggedList(last)}
         <button class="btn btn--ghost" data-action="choose-workout">Extra-Workout starten</button>
-      </div>`;
+      </section>`;
   } else {
-    const next = nextTrainingInfo(today);
     const extraDone = doneToday.length > 0;
     hero = `
-      <div class="hero hero--rest">
-        <div class="eyebrow">Ruhetag</div>
-        <h2>${extraDone ? "Trotzdem trainiert 🔥" : "Erholung"}</h2>
-        <p>${extraDone
-          ? "Du hast heute freiwillig trainiert — Respekt. Gönn deinen Muskeln jetzt die Pause."
-          : "Muskeln wachsen in der Pause — das Video empfiehlt 24–48 h zwischen den Workouts."}${
-          next ? ` Nächstes Training: <strong>${next.day} · Workout ${next.workout}</strong>.` : ""}</p>
+      <section class="today" aria-label="Ruhetag">
+        ${title(extraDone ? "Trotzdem trainiert" : "Erholung")}
+        <p class="today-meta">${extraDone
+          ? "Du hast heute freiwillig trainiert. Gönn deinen Muskeln jetzt die Pause."
+          : "Ruhetag. Muskeln wachsen in der Pause, das Video empfiehlt 24 bis 48 h zwischen den Workouts."}${nextLine(nextTrainingInfo(today))}</p>
+        ${extraDone ? loggedList(doneToday[doneToday.length - 1]) : ""}
         <button class="btn btn--ghost" data-action="choose-workout">Trotzdem trainieren</button>
-      </div>`;
+      </section>`;
   }
 
-  /* Wochenstreifen */
+  /* Wochenstreifen: Balken in der Farbe des schwersten Gewichts des Tages */
   const mon = mondayOf(today);
   const dows = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   let strip = "";
@@ -469,52 +498,77 @@ function renderHome() {
     const d = addDays(mon, i);
     const dIso = fmtISO(d);
     const w = workoutFor(d);
-    const done = entriesOn(dIso).length > 0;
+    const entries = entriesOn(dIso);
     const isToday = dIso === iso;
-    let slot;
-    if (done) slot = `<span class="slot slot--done">${ICONS.check}</span>`;
-    else if (w === "A") slot = `<span class="slot slot--a">A</span>`;
-    else if (w === "B") slot = `<span class="slot slot--b">B</span>`;
-    else slot = `<span class="slot slot--rest">·</span>`;
+    let cls, slot, style = "", label;
+    if (entries.length) {
+      const top = Math.max(...entries.map((h) => maxWeight(h) || 0));
+      cls = "wd--done";
+      slot = ICONS.check;
+      style = top ? ` style="--bar:${kgColor(top)}"` : ` style="--bar:var(--paint)"`;
+      label = `erledigt${top ? ", bis " + top + " kg" : ""}`;
+    } else if (w) {
+      // Vorschau: schwerstes Gewicht aus dem letzten Workout dieses Typs
+      const planned = maxWeight({ weights: lastWeights(w) }) || DEFAULT_WEIGHT;
+      cls = "wd--plan";
+      slot = w;
+      style = ` style="--bar:${kgColor(planned)}"`;
+      label = `Workout ${w}, geplant bis ${planned} kg`;
+    } else {
+      cls = "wd--rest";
+      slot = "–";
+      label = "Ruhetag";
+    }
     strip += `
-      <div class="day${isToday ? " day--today" : ""}">
+      <div class="wd ${cls}${isToday ? " wd--today" : ""}"${style} aria-label="${dows[i]} ${d.getDate()}.: ${label}${isToday ? ", heute" : ""}">
         <span class="dow">${dows[i]}</span>
-        <span class="num">${d.getDate()}</span>
-        ${slot}
+        <span class="dnum">${d.getDate()}</span>
+        <span class="slot" aria-hidden="true">${slot}</span>
       </div>`;
   }
 
   el("screen-home").innerHTML = `
-    <header class="row">
-      <div class="grow">
-        <div class="eyebrow">${dateLabel}</div>
-        <h1 class="h-greeting">${greeting()}</h1>
+    <header>
+      <div class="brandbar">
+        <span class="brand">Kettlebell 15</span>
+        <button class="icon-btn" data-action="open-settings" aria-label="Einstellungen">${ICONS.gear}</button>
       </div>
-      <span class="pill pill--a" title="Streak">${ICONS.flame.replace('viewBox', 'width="13" height="13" viewBox')} ${streak}</span>
-      <button class="icon-btn" data-action="open-settings" aria-label="Einstellungen">${ICONS.gear}</button>
+      <p class="dateline">${dateLabel} · Rotations-Woche ${wIdx + 1} (${wIdx === 0 ? "A–B–A" : "B–A–B"})</p>
     </header>
 
-    <div class="mt-18">${hero}</div>
+    ${hero}
 
-    <div class="section-title">Diese Woche <small>Rotations-Woche ${wIdx + 1} · ${wIdx === 0 ? "A–B–A" : "B–A–B"}</small></div>
+    <h2 class="section-title">Diese Woche <small>Mo · Mi · Fr</small></h2>
     <div class="weekstrip">${strip}</div>
 
-    <div class="section-title">Deine Stats</div>
-    <div class="stats-row">
-      <div class="stat">
-        <span class="chip chip--orange">${ICONS.flame}</span>
-        <div><div class="value">${streak}</div><div class="unit">Streak</div></div>
-      </div>
-      <div class="stat">
-        <span class="chip chip--gray">${ICONS.bell}</span>
-        <div><div class="value">${state.history.length}</div><div class="unit">Workouts</div></div>
-      </div>
-      <div class="stat">
-        <span class="chip chip--blue">${ICONS.clock}</span>
-        <div><div class="value">${minutesThisWeek()}</div><div class="unit">Min/Woche</div></div>
-      </div>
+    <h2 class="section-title">Zahlen</h2>
+    <div class="statline">
+      <div><div class="v">${streak}</div><div class="k">Serie</div></div>
+      <div><div class="v">${state.history.length}</div><div class="k">Workouts</div></div>
+      <div><div class="v">${minutesThisWeek()}</div><div class="k">Min./Woche</div></div>
     </div>
   `;
+}
+
+/* Übungszeilen mit Gewichtspunkt: rows = [{ id, reps, unit }] */
+function bellList(rows, weights) {
+  return `<ul class="bells">${rows
+    .map((r) => `
+      <li>
+        ${kgDot(weights[r.id] != null ? weights[r.id] : DEFAULT_WEIGHT)}
+        <span class="b-name">${exFor(r.id).name}</span>
+        <span class="b-reps">${r.reps}<small>${r.unit}</small></span>
+      </li>`)
+    .join("")}</ul>`;
+}
+
+/* Gespeicherte Gewichte eines Eintrags als Übungszeilen */
+function loggedList(entry) {
+  if (!entry || !entry.weights) return "";
+  const rows = Object.keys(entry.weights)
+    .filter((id) => EXERCISES[id])
+    .map((id) => ({ id, reps: "", unit: "" }));
+  return rows.length ? bellList(rows, entry.weights) : "";
 }
 
 /* ---------------- Screen: Fortschritt ---------------- */
@@ -525,7 +579,7 @@ function renderProgress() {
   /* Chart-Daten */
   const exIds = ["fs", "cp", "row", "swing", "thruster"];
   const chips = exIds
-    .map((id) => `<button class="chip-btn${ui.chartEx === id ? " is-active" : ""}" data-action="chart-ex" data-ex="${id}">${exFor(id).name}</button>`)
+    .map((id) => `<button class="chip-btn${ui.chartEx === id ? " is-active" : ""}" data-action="chart-ex" data-ex="${id}" aria-pressed="${ui.chartEx === id}">${exFor(id).name}</button>`)
     .join("");
 
   const points = state.history
@@ -537,7 +591,7 @@ function renderProgress() {
 
   let historyHtml;
   if (!state.history.length) {
-    historyHtml = `<div class="empty"><div class="big">🏋️</div>Noch keine Workouts.<br>Starte heute — dein Verlauf erscheint hier.</div>`;
+    historyHtml = `<div class="empty">Noch keine Workouts.<br>Starte heute, dein Verlauf erscheint hier.</div>`;
   } else {
     historyHtml = state.history
       .map((h, idx) => ({ h, idx }))
@@ -545,55 +599,46 @@ function renderProgress() {
       .slice(0, 30)
       .map(({ h, idx }) => {
         const d = parseISO(h.date).toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit" });
-        const modeLabel = h.mode === "emom" ? "EMOM" : h.mode === "interval" ? "Intervalle" : "Zirkel · 3 Runden";
+        const modeLabel = h.mode === "emom" ? "EMOM" : h.mode === "interval" ? "Intervalle" : "Zirkel, 3 Runden";
         const focus = h.workout === "A" ? "Kraft" : "Conditioning";
+        const kgs = h.weights
+          ? Object.keys(h.weights).filter((id) => h.weights[id] != null).map((id) => kgDot(h.weights[id], "sm")).join("")
+          : "";
         return `
-          <button class="history-item" data-action="history-entry" data-idx="${idx}">
-            <span class="h-icon ${h.workout === "A" ? "a" : "b"}">${h.workout}</span>
+          <button class="history-item" data-action="history-entry" data-idx="${idx}" aria-label="Workout ${h.workout}, ${d}, ${h.minutes} Minuten. Antippen zum Löschen">
+            <span class="h-icon">${h.workout}</span>
             <span class="grow">
-              <span class="h-title">Workout ${h.workout} · ${focus}</span>
+              <span class="h-title">${focus}</span>
               <span class="h-sub">${d} · ${modeLabel}</span>
+              ${kgs ? `<span class="h-kgs">${kgs}</span>` : ""}
             </span>
-            <span class="h-min">${h.minutes} Min<br><span style="font-weight:600;color:var(--text-3)">≈ ${kcalOf(h.minutes)} kcal</span></span>
+            <span class="h-min">${h.minutes} Min<small>≈ ${kcalOf(h.minutes)} kcal</small></span>
           </button>`;
       })
       .join("");
+    historyHtml = `<div class="history">${historyHtml}</div>`;
   }
 
   el("screen-progress").innerHTML = `
     <header>
-      <div class="eyebrow">Fortschritt</div>
-      <h1 class="h-greeting">Deine Entwicklung</h1>
+      <h1 class="h-screen">Fortschritt</h1>
     </header>
 
-    <div class="stats-row mt-18">
-      <div class="stat">
-        <span class="chip chip--orange">${ICONS.bell}</span>
-        <div><div class="value">${state.history.length}</div><div class="unit">Workouts</div></div>
-      </div>
-      <div class="stat">
-        <span class="chip chip--blue">${ICONS.clock}</span>
-        <div><div class="value">${totalMin}</div><div class="unit">Minuten</div></div>
-      </div>
-      <div class="stat">
-        <span class="chip chip--gray">${ICONS.flame}</span>
-        <div><div class="value">${kcalOf(totalMin)}</div><div class="unit">≈ kcal</div></div>
-      </div>
-    </div>
-
-    <div class="section-title">Gewichts-Progression</div>
-    <div class="card chart-card">
+    <div class="chart-card mt-18">
       <div class="chart-head">
+        ${lastW != null ? kgDot(lastW, "lg") : ""}
         <div>
-          <div class="eyebrow">${exFor(ui.chartEx).name}</div>
-          <div class="chart-val">${lastW != null ? lastW + ' <small>kg aktuell</small>' : '<small>keine Daten</small>'}</div>
+          <div class="chart-val">${lastW != null ? lastW + "<small>kg aktuell</small>" : "<small>Noch keine Daten</small>"}</div>
+          <div class="chart-name">${exFor(ui.chartEx).name}</div>
         </div>
       </div>
-      <div class="chip-row">${chips}</div>
+      <div class="chip-row" role="group" aria-label="Übung für die Kurve">${chips}</div>
       ${renderChart(points)}
     </div>
 
-    <div class="section-title">Verlauf</div>
+    <p class="totals">Gesamt: <strong>${state.history.length}</strong> Workouts · <strong>${totalMin}</strong> Minuten · ≈ <strong>${kcalOf(totalMin)}</strong> kcal</p>
+
+    <h2 class="section-title">Verlauf <small>Antippen zum Löschen</small></h2>
     ${historyHtml}
   `;
 }
@@ -603,7 +648,7 @@ function renderChart(points) {
     return `<div class="empty small">Schließe ein Workout mit dieser Übung ab,<br>dann siehst du hier deine Gewichtskurve.</div>`;
   }
 
-  const W = 340, H = 162, padL = 30, padR = 14, padT = 26, padB = 24;
+  const W = 340, H = 176, padL = 30, padR = 14, padT = 36, padB = 24;
   const ws = points.map((p) => p.w);
   let min = Math.min(...ws), max = Math.max(...ws);
   if (min === max) { min -= 2; max += 2; }
@@ -616,11 +661,14 @@ function renderChart(points) {
     : padL + (i * (W - padL - padR)) / (points.length - 1);
   const y = (w) => padT + (1 - (w - min) / (max - min)) * (H - padT - padB);
 
-  /* Step-Pfad wie im Screenshot-Chart */
-  let path = `M ${x(0)} ${y(points[0].w)}`;
+  /* Stufenlinie: jedes Stück in der Farbe seines Gewichts, der Sprung
+     nach oben trägt schon die neue Farbe */
+  let steps = "";
   for (let i = 1; i < points.length; i++) {
     const xm = (x(i - 1) + x(i)) / 2;
-    path += ` H ${xm} V ${y(points[i].w)} H ${x(i)}`;
+    const y0 = y(points[i - 1].w), y1 = y(points[i].w);
+    steps += `<path class="step-line" style="stroke:${kgColor(points[i - 1].w)}" d="M ${x(i - 1)} ${y0} H ${xm}"/>`;
+    steps += `<path class="step-line" style="stroke:${kgColor(points[i].w)}" d="M ${xm} ${y0} V ${y1} H ${x(i)}"/>`;
   }
 
   /* Gridlines */
@@ -639,15 +687,16 @@ function renderChart(points) {
   let dots = "";
   let badges = "";
   points.forEach((p, i) => {
-    dots += `<circle class="pt" cx="${x(i)}" cy="${y(p.w)}" r="4"/>`;
+    const c = kgColor(p.w);
+    dots += `<circle class="pt" cx="${x(i)}" cy="${y(p.w)}" r="7" fill="${c}"/>`;
     if (badgeIdx.has(i)) {
       const label = p.w + " kg";
-      const bw = label.length * 6 + 12;
+      const bw = label.length * 6.5 + 12;
       let bx = x(i) - bw / 2;
       bx = Math.max(padL - 16, Math.min(bx, W - padR - bw + 8));
-      const by = y(p.w) - 24;
-      badges += `<g><rect class="badge-rect" x="${bx}" y="${by}" width="${bw}" height="16" rx="8"/>
-        <text class="badge-text" x="${bx + bw / 2}" y="${by + 11.5}" text-anchor="middle">${label}</text></g>`;
+      const by = y(p.w) - 28;
+      badges += `<g><rect x="${bx}" y="${by}" width="${bw}" height="18" rx="3" fill="${c}"/>
+        <text class="badge-text" x="${bx + bw / 2}" y="${by + 13}" text-anchor="middle" fill="${kgInk(c)}">${label}</text></g>`;
     }
   });
 
@@ -667,22 +716,12 @@ function renderChart(points) {
     xLabels += `<text class="grid-label" x="${lx}" y="${H - 5}" text-anchor="${anchor}">${lbl}</text>`;
   });
 
-  const area = points.length > 1
-    ? `<path class="step-area" d="${path} V ${H - padB} H ${x(0)} Z"/>`
-    : "";
-
   return `
-    <svg class="chart-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="rgba(255,122,47,0.22)"/>
-          <stop offset="1" stop-color="rgba(255,122,47,0)"/>
-        </linearGradient>
-      </defs>
+    <svg class="chart-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="Gewichtsverlauf: ${points.map((p) => p.w + " kg").join(", ")}">
       ${grid}
       ${xLabels}
-      ${area}
-      ${points.length > 1 ? `<path class="step-line" d="${path}"/>` : ""}
+      ${steps}
       ${dots}
       ${badges}
     </svg>`;
@@ -700,16 +739,16 @@ function renderGuide() {
       // Hinweis auf die jeweils andere Equipment-Variante — entfällt,
       // wenn die Ausführung identisch ist (Swing)
       const alt = oneActive
-        ? (v.name === e.name ? "" : `Mit 2 Kettlebells: ${e.name} — beide Kettlebells gleichzeitig.`)
-        : `Mit 1 Kettlebell: ${e.oneBell.name} — ${e.oneBell.sub}.`;
+        ? (v.name === e.name ? "" : `Mit 2 Kettlebells: ${e.name}, beide Kettlebells gleichzeitig.`)
+        : `Mit 1 Kettlebell: ${e.oneBell.name}. ${e.oneBell.sub}.`;
       return `
-        <div class="card guide-card">
+        <div class="guide-card">
           <div class="row">
             <div class="grow">
               <h3>${v.name}</h3>
               <div class="g-sub">${oneActive ? v.sub : e.de} · ${e.muscles}</div>
             </div>
-            <span class="pill ${inA ? "pill--a" : "pill--b"}">${inA ? "Workout A" : "Workout B"}</span>
+            <span class="tag">${inA ? "Workout A" : "Workout B"}</span>
           </div>
           ${exVideo(id, { controls: true })}
           <ul>${v.tips.map((t) => `<li>${t}</li>`).join("")}</ul>
@@ -718,47 +757,56 @@ function renderGuide() {
     })
     .join("");
 
+  const legend = KG_LEGEND
+    .map((kg) => `<div>${kgDot(kg, "md")}<span>${kg} kg</span></div>`)
+    .join("");
+
   el("screen-guide").innerHTML = `
     <header>
-      <div class="eyebrow">Guide</div>
-      <h1 class="h-greeting">Das Programm</h1>
+      <h1 class="h-screen">Das Programm</h1>
     </header>
 
-    <div class="card mt-18 guide-card">
+    <div class="guide-card mt-18">
       <h3>So funktioniert der Plan</h3>
       <ul>
-        <li><strong>Mo / Mi / Fr</strong> — 15 Minuten, zwei Workouts im Wechsel</li>
-        <li><strong>Workout A (Kraft):</strong> Zirkel ×3 — ${WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(", ")}, danach 90 s Pause</li>
-        <li><strong>Workout B (Conditioning):</strong> ${exFor("swing").name}s + ${exFor("thruster").name}s — als EMOM oder Intervalle</li>
-        <li><strong>2-Wochen-Rotation:</strong> Woche 1 = A·B·A, Woche 2 = B·A·B — so machst du jedes Workout 3× in 2 Wochen</li>
-        <li><strong>Di / Do / Sa / So sind Ruhetage:</strong> mind. 24 h, ideal 48 h Pause — Muskeln wachsen in der Erholung</li>
+        <li><strong>Mo / Mi / Fr:</strong> 15 Minuten, zwei Workouts im Wechsel</li>
+        <li><strong>Workout A (Kraft):</strong> Zirkel ×3 aus ${WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(", ")}, danach 90 s Pause</li>
+        <li><strong>Workout B (Conditioning):</strong> ${exFor("swing").name}s + ${exFor("thruster").name}s, als EMOM oder Intervalle</li>
+        <li><strong>2-Wochen-Rotation:</strong> Woche 1 = A·B·A, Woche 2 = B·A·B. So machst du jedes Workout 3× in 2 Wochen</li>
+        <li><strong>Di / Do / Sa / So sind Ruhetage:</strong> mind. 24 h, ideal 48 h Pause. Muskeln wachsen in der Erholung</li>
       </ul>
-      <a class="link-video mt-12" style="display:inline-flex" href="${VIDEO_URL}" target="_blank" rel="noopener">${ICONS.ext} Original-Video von George Thomas ansehen</a>
+      <a class="link-video" href="${VIDEO_URL}" target="_blank" rel="noopener">${ICONS.ext} Original-Video von George Thomas ansehen</a>
     </div>
 
-    <div class="card guide-card">
+    <div class="guide-card">
       <h3>Was du brauchst</h3>
       <ul>
-        <li>1 Kettlebell reicht — ideal sind 2 (für Front Squat, Clean &amp; Press und Rows)</li>
-        <li>1 m² Platz — Küche, Wohnzimmer, Schlafzimmer</li>
-        <li>Nicht vor Glas oder dem Haustierbett trainieren 😉</li>
+        <li>1 Kettlebell reicht, ideal sind 2 (für Front Squat, Clean &amp; Press und Rows)</li>
+        <li>1 m² Platz: Küche, Wohnzimmer, Schlafzimmer</li>
+        <li>Nicht vor Glas oder dem Haustierbett trainieren</li>
       </ul>
     </div>
 
-    <div class="card guide-card">
+    <div class="guide-card">
+      <h3>Farbcode der Gewichte</h3>
+      <div class="g-sub">Jedes Gewicht in der App trägt die Farbe der Wettkampf-Kettlebell. Zwischengewichte (10, 14, 18 kg …) zeigen eine hellere Stufe der nächsten Farbe.</div>
+      <div class="kg-legend">${legend}</div>
+    </div>
+
+    <div class="guide-card">
       <h3>Sicher Muskeln aufbauen</h3>
       <ul>
-        <li><strong>Leicht starten</strong> — Einsteiger bei Swings mit 6–8 kg, lieber zu leicht als zu schwer</li>
-        <li><strong>Nicht hetzen:</strong> Wer zu schnell zu schwer trainiert, verletzt sich — sagt auch das Video</li>
+        <li><strong>Leicht starten:</strong> Einsteiger bei Swings mit 6–8 kg, lieber zu leicht als zu schwer</li>
+        <li><strong>Nicht hetzen:</strong> Wer zu schnell zu schwer trainiert, verletzt sich. Das sagt auch das Video</li>
         <li><strong>Progression:</strong> Erst die Wiederholungen im Bereich ausreizen (z.&nbsp;B. 8 → 12), dann das Gewicht erhöhen und wieder unten im Bereich starten</li>
         <li>Saubere Technik schlägt jedes Extra-Kilo</li>
       </ul>
     </div>
 
-    <div class="section-title">Die 5 Übungen</div>
+    <h2 class="section-title">Die 5 Übungen</h2>
     ${exCards}
 
-    <p class="text-center text-2 small mt-24">Kettlebell 15 · Programm nach George Thomas<br>Alle Daten bleiben lokal auf deinem Gerät.</p>
+    <p class="foot">Kettlebell 15 · Programm nach George Thomas<br>Alle Daten bleiben lokal auf deinem Gerät.</p>
   `;
 }
 
@@ -770,13 +818,13 @@ function renderSettingsOverlay() {
   openOverlay(`
     ${ovHead("Einstellungen")}
     <div class="ov-body">
-      <div class="card">
+      <div class="settings">
         <div class="setting-row">
           <div class="grow">
             <div class="s-title">Kettlebells</div>
             <div class="s-sub">Passt die Übungsvarianten an dein Equipment an</div>
           </div>
-          <div class="seg-control" style="width:120px">
+          <div class="seg-control">
             <button class="${state.settings.bells === 1 ? "is-active" : ""}" data-action="set-bells" data-n="1" aria-pressed="${state.settings.bells === 1}">1</button>
             <button class="${state.settings.bells === 2 ? "is-active" : ""}" data-action="set-bells" data-n="2" aria-pressed="${state.settings.bells === 2}">2</button>
           </div>
@@ -805,7 +853,7 @@ function renderSettingsOverlay() {
         <div class="setting-row">
           <div class="grow">
             <div class="s-title">Wiederherstellen</div>
-            <div class="s-sub">Backup-Datei importieren — ersetzt aktuelle Daten</div>
+            <div class="s-sub">Backup-Datei importieren, ersetzt aktuelle Daten</div>
           </div>
           <button class="btn btn--ghost btn--small" data-action="data-import">Import</button>
         </div>
@@ -817,7 +865,7 @@ function renderSettingsOverlay() {
           <button class="btn btn--danger-ghost btn--small" data-action="data-reset">Zurücksetzen</button>
         </div>
       </div>
-      <p class="text-center text-2 small mt-24">Alle Daten bleiben lokal auf deinem Gerät.</p>
+      <p class="foot">Alle Daten bleiben lokal auf deinem Gerät.</p>
     </div>
   `, { keepScroll: true });
 }
@@ -938,11 +986,7 @@ function renderFlowA() {
             <div class="ex-reps"><div class="n">${e.reps}</div><div class="l">${ex.perSide ? "je Seite" : "Wdh."}</div></div>
           </div>
           ${exVideo(e.id)}
-          <div class="stepper">
-            <button class="s-btn" data-action="w-step" data-flow="a" data-ex="${e.id}" data-d="-2">−</button>
-            <div class="s-val">${f.weights[e.id]}<small>kg</small></div>
-            <button class="s-btn" data-action="w-step" data-flow="a" data-ex="${e.id}" data-d="2">+</button>
-          </div>
+          ${stepper("a", e.id, f.weights[e.id])}
         </div>`;
     })
     .join("");
@@ -952,14 +996,29 @@ function renderFlowA() {
     <div class="ov-body">
       <div class="rounds">${segs}</div>
       ${cards}
-      <p class="text-2 small text-center">Alle 3 Übungen direkt nacheinander, dann 90 s Pause.</p>
+      <p class="foot">Alle 3 Übungen direkt nacheinander, dann 90 s Pause.</p>
     </div>
     <div class="ov-footer">
       <button class="btn btn--primary" data-action="a-round" ${allDone ? "" : "disabled"}>
-        ${f.round < WORKOUT_A.rounds ? "Runde abschließen → 90 s Pause" : "Workout abschließen"}
+        ${f.round < WORKOUT_A.rounds ? "Runde fertig, 90 s Pause" : "Workout abschließen"}
       </button>
     </div>
   `);
+}
+
+/* Gewichts-Stepper in 2-kg-Schritten; der Punkt zeigt die Wettkampffarbe */
+function stepper(flow, exId, kg) {
+  const name = exFor(exId).name;
+  return `
+    <div class="stepper">
+      <button class="s-btn" data-action="w-step" data-flow="${flow}" data-ex="${exId}" data-d="-2" aria-label="${name}: 2 kg leichter">−</button>
+      <div class="s-val" aria-live="polite">${stepperVal(kg)}</div>
+      <button class="s-btn" data-action="w-step" data-flow="${flow}" data-ex="${exId}" data-d="2" aria-label="${name}: 2 kg schwerer">+</button>
+    </div>`;
+}
+
+function stepperVal(kg, stamp) {
+  return kgDot(kg, "lg").replace('class="kg kg--lg"', `class="kg kg--lg${stamp ? " stamp" : ""}"`) + "<span>kg</span>";
 }
 
 function completeRoundA() {
@@ -973,8 +1032,7 @@ function completeRoundA() {
       startTs: f.startTs,
       weights: Object.assign({}, f.weights),
       title: "Workout A · Kraft",
-      emoji: "💪",
-      cells: WORKOUT_A.exercises.map((e) => ({ v: f.weights[e.id] + " kg", k: exFor(e.id).name })),
+      cells: WORKOUT_A.exercises.map((e) => ({ v: f.weights[e.id] + " kg", k: exFor(e.id).name, kg: f.weights[e.id] })),
     });
   }
 }
@@ -987,12 +1045,11 @@ function renderRestA() {
       <div class="timer-ring is-rest" id="tRing">
         ${ringSvg()}
         <div class="ring-center">
-          <div class="t-phase">Pause</div>
           <div class="t-time" id="tTime">1:30</div>
         </div>
       </div>
       <div class="t-exercise">
-        <div class="name">Durchatmen 😮‍💨</div>
+        <div class="name">Durchatmen</div>
         <div class="target">Gleich geht's weiter mit Runde ${f.round + 1}</div>
       </div>
       <div class="t-next">Als Nächstes: <strong>${WORKOUT_A.exercises.map((e) => exFor(e.id).name).join(" · ")}</strong></div>
@@ -1054,11 +1111,11 @@ function renderFlowBSelect() {
         <span class="mc-text">${iv.swingWork} s ${swEx.name}s → ${iv.swingRest} s Pause → ${f.easier ? iv.easierWork : iv.thrusterWork} s ${thEx.name}s → ${f.easier ? iv.easierRest : iv.thrusterRest} s Pause.</span>
       </button>
       ${f.mode === "interval" ? `
-        <div class="card">
-          <div class="setting-row" style="padding:2px 0">
+        <div class="easier">
+          <div class="setting-row">
             <div class="grow">
               <div class="s-title">Leichter Modus</div>
-              <div class="s-sub">${thEx.name}s ${iv.easierWork} s Arbeit / ${iv.easierRest} s Pause — wenn ${iv.thrusterWork} s zu hart sind</div>
+              <div class="s-sub">${thEx.name}s ${iv.easierWork} s Arbeit / ${iv.easierRest} s Pause, wenn ${iv.thrusterWork} s zu hart sind</div>
             </div>
             <button class="switch ${f.easier ? "is-on" : ""}" data-action="b-easier" role="switch" aria-checked="${f.easier}" aria-label="Leichter Modus"></button>
           </div>
@@ -1072,11 +1129,7 @@ function renderFlowBSelect() {
           </div>
         </div>
         ${exVideo("swing")}
-        <div class="stepper">
-          <button class="s-btn" data-action="w-step" data-flow="b" data-ex="swing" data-d="-2">−</button>
-          <div class="s-val">${f.weights.swing}<small>kg</small></div>
-          <button class="s-btn" data-action="w-step" data-flow="b" data-ex="swing" data-d="2">+</button>
-        </div>
+        ${stepper("b", "swing", f.weights.swing)}
       </div>
       <div class="ex-card">
         <div class="ex-top">
@@ -1086,11 +1139,7 @@ function renderFlowBSelect() {
           </div>
         </div>
         ${exVideo("thruster")}
-        <div class="stepper">
-          <button class="s-btn" data-action="w-step" data-flow="b" data-ex="thruster" data-d="-2">−</button>
-          <div class="s-val">${f.weights.thruster}<small>kg</small></div>
-          <button class="s-btn" data-action="w-step" data-flow="b" data-ex="thruster" data-d="2">+</button>
-        </div>
+        ${stepper("b", "thruster", f.weights.thruster)}
       </div>
     </div>
     <div class="ov-footer">
@@ -1109,45 +1158,46 @@ function buildPhasesB() {
     const m = WORKOUT_B.emom;
     for (let i = 1; i <= m.minutes; i++) {
       const isSwing = i % 2 === 1;
+      // reps/unit stehen groß unter dem Namen, hint klein darunter; nextEx bekommt seinen Gewichtspunkt
+      const nextIsSwing = !isSwing;
       phases.push({
         seconds: 60,
         type: "work",
         ex: isSwing ? "swing" : "thruster",
         label: `Minute ${i}/${m.minutes}`,
         exName: isSwing ? swEx.name + "s" : thEx.name + "s",
-        target: `${isSwing ? m.swingReps : m.thrusterReps} Wiederholungen · ${f.weights[isSwing ? "swing" : "thruster"]} kg`,
-        hint: "…dann Pause bis zur nächsten Minute",
-        next: i < m.minutes ? (isSwing ? `${thEx.name}s ${m.thrusterReps}` : `${swEx.name}s ${m.swingReps}`) : "Fertig 🎉",
+        reps: isSwing ? m.swingReps : m.thrusterReps,
+        unit: "Wdh.",
+        hint: "Rest der Minute ist Pause",
+        next: i < m.minutes ? `${nextIsSwing ? swEx.name : thEx.name}s ${nextIsSwing ? m.swingReps : m.thrusterReps}` : "Fertig",
+        nextEx: i < m.minutes ? (nextIsSwing ? "swing" : "thruster") : null,
       });
     }
   } else {
     const iv = WORKOUT_B.interval;
     const tWork = f.easier ? iv.easierWork : iv.thrusterWork;
     const tRest = f.easier ? iv.easierRest : iv.thrusterRest;
+    const restHint = "Locker bleiben, Atmung kontrollieren";
     for (let r = 1; r <= iv.rounds; r++) {
+      const label = `Runde ${r}/${iv.rounds}`;
       phases.push({
-        seconds: iv.swingWork, type: "work", ex: "swing",
-        label: `Runde ${r}/${iv.rounds}`, exName: swEx.name + "s",
-        target: `${iv.swingWork} s Vollgas · ${f.weights.swing} kg`,
-        next: `${iv.swingRest} s Pause`,
+        seconds: iv.swingWork, type: "work", ex: "swing", label, exName: swEx.name + "s",
+        reps: `${iv.swingWork} s`, unit: "Vollgas",
+        next: `${iv.swingRest} s Pause`, nextEx: null,
       });
       phases.push({
-        seconds: iv.swingRest, type: "rest", ex: null,
-        label: `Runde ${r}/${iv.rounds}`, exName: "Pause",
-        target: "Locker bleiben, Atmung kontrollieren",
-        next: `${thEx.name}s ${tWork} s`,
+        seconds: iv.swingRest, type: "rest", ex: null, label, exName: "Pause", hint: restHint,
+        next: `${thEx.name}s ${tWork} s`, nextEx: "thruster",
       });
       phases.push({
-        seconds: tWork, type: "work", ex: "thruster",
-        label: `Runde ${r}/${iv.rounds}`, exName: thEx.name + "s",
-        target: `${tWork} s Vollgas · ${f.weights.thruster} kg`,
-        next: `${tRest} s Pause`,
+        seconds: tWork, type: "work", ex: "thruster", label, exName: thEx.name + "s",
+        reps: `${tWork} s`, unit: "Vollgas",
+        next: `${tRest} s Pause`, nextEx: null,
       });
       phases.push({
-        seconds: tRest, type: "rest", ex: null,
-        label: `Runde ${r}/${iv.rounds}`, exName: "Pause",
-        target: "Locker bleiben, Atmung kontrollieren",
-        next: r < iv.rounds ? `${swEx.name}s ${iv.swingWork} s` : "Fertig 🎉",
+        seconds: tRest, type: "rest", ex: null, label, exName: "Pause", hint: restHint,
+        next: r < iv.rounds ? `${swEx.name}s ${iv.swingWork} s` : "Fertig",
+        nextEx: r < iv.rounds ? "swing" : null,
       });
     }
   }
@@ -1166,16 +1216,16 @@ function startTimerB() {
   openOverlay(`
     ${ovHead("Workout B · " + modeLabel, `${swEx.name}s + ${thEx.name}s`)}
     <div class="timer-wrap">
-      <div class="eyebrow" id="tLabel"></div>
+      <div class="t-label" id="tLabel"></div>
       <div class="timer-ring" id="tRing">
         ${ringSvg()}
         <div class="ring-center">
-          <div class="t-phase" id="tPhase"></div>
           <div class="t-time" id="tTime"></div>
         </div>
       </div>
       <div class="t-exercise">
-        <div class="name" id="tEx"></div>
+        <div class="t-ex-row"><span id="tKg"></span><div class="name" id="tEx"></div></div>
+        <div class="t-reps" id="tReps"></div>
         <div class="target" id="tTarget"></div>
       </div>
       <div class="t-next" id="tNext"></div>
@@ -1189,13 +1239,16 @@ function startTimerB() {
   KBTimer.start(phases, {
     onPhase: (p) => {
       el("tLabel").textContent = p.label;
-      el("tPhase").textContent = p.exName.toUpperCase();
       el("tEx").textContent = p.exName;
-      el("tTarget").textContent = p.target + (p.hint ? " " + p.hint : "");
-      el("tNext").innerHTML = p.next ? `Danach: <strong>${p.next}</strong>` : "";
+      el("tKg").innerHTML = p.ex ? kgDot(f.weights[p.ex], "lg") : "";
+      el("tReps").innerHTML = p.reps ? `${p.reps}<small>${p.unit}</small>` : "";
+      el("tTarget").textContent = p.hint || "";
+      el("tNext").innerHTML = p.next
+        ? `Danach: ${p.nextEx ? kgDot(f.weights[p.nextEx], "sm") : ""}<strong>${p.next}</strong>`
+        : "";
       const ring = el("tRing");
       ring.classList.toggle("is-rest", p.type === "rest");
-      ring.classList.toggle("is-thruster", p.ex === "thruster");
+      if (p.ex) ring.style.setProperty("--ring", kgColor(f.weights[p.ex]));
       // Technik-Loop zur aktuellen Übung (falls ein Clip hinterlegt ist)
       const tv = el("tVideo");
       if (tv) {
@@ -1222,10 +1275,9 @@ function startTimerB() {
         startTs: f.startTs,
         weights: Object.assign({}, f.weights),
         title: "Workout B · " + (f.mode === "emom" ? "EMOM" : "Intervalle"),
-        emoji: "🔥",
         cells: [
-          { v: f.weights.swing + " kg", k: swEx.name },
-          { v: f.weights.thruster + " kg", k: thEx.name },
+          { v: f.weights.swing + " kg", k: swEx.name, kg: f.weights.swing },
+          { v: f.weights.thruster + " kg", k: thEx.name, kg: f.weights.thruster },
         ],
       });
     },
@@ -1240,8 +1292,8 @@ const RING_C = 2 * Math.PI * RING_R;
 function ringSvg() {
   return `
     <svg viewBox="0 0 280 280">
-      <circle class="ring-bg" cx="140" cy="140" r="${RING_R}" fill="none" stroke-width="10"/>
-      <circle class="ring-fg" id="ringFg" cx="140" cy="140" r="${RING_R}" fill="none" stroke-width="10"
+      <circle class="ring-bg" cx="140" cy="140" r="${RING_R}" fill="none" stroke-width="12"/>
+      <circle class="ring-fg" id="ringFg" cx="140" cy="140" r="${RING_R}" fill="none" stroke-width="12"
         stroke-linecap="round" stroke-dasharray="${RING_C}" stroke-dashoffset="0"/>
     </svg>`;
 }
@@ -1289,14 +1341,13 @@ function finishWorkout(opts) {
     ${ovHead("Geschafft!", opts.title)}
     <div class="ov-body">
       <div class="done-hero">
-        <div class="emoji">${opts.emoji}</div>
-        <h2>Workout ${opts.workout} fertig!</h2>
+        <h2>Workout ${opts.workout} fertig</h2>
         <p>${opts.workout === "A"
-          ? "Kraft-Reiz gesetzt — gönn dir jetzt Erholung und Protein."
-          : "Conditioning &amp; Power — dein Herz hat heute gearbeitet."}</p>
+          ? "Kraft-Reiz gesetzt. Gönn dir jetzt Erholung und Protein."
+          : "Conditioning &amp; Power erledigt. Dein Herz hat heute gearbeitet."}</p>
       </div>
-      <div class="summary-grid">
-        ${cells.map((c) => `<div class="cell"><div class="v">${c.v}</div><div class="k">${c.k}</div></div>`).join("")}
+      <div class="summary">
+        ${cells.map((c) => `<div class="cell"><span class="k">${c.k}</span>${c.kg != null ? kgDot(c.kg, "md") : ""}<span class="v">${c.v}</span></div>`).join("")}
       </div>
     </div>
     <div class="ov-footer">
@@ -1441,7 +1492,7 @@ document.addEventListener("click", (ev) => {
       const next = Math.round(((f.weights[ex] || DEFAULT_WEIGHT) + d) / 2) * 2;
       f.weights[ex] = Math.max(2, Math.min(48, next));
       // Nur die Anzeige aktualisieren — kein Re-Render, sonst springt der Scroll
-      t.closest(".stepper").querySelector(".s-val").innerHTML = `${f.weights[ex]}<small>kg</small>`;
+      t.closest(".stepper").querySelector(".s-val").innerHTML = stepperVal(f.weights[ex], true);
       break;
     }
 
@@ -1487,7 +1538,7 @@ document.addEventListener("click", (ev) => {
       const d = parseISO(h.date).toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit" });
       showModal({
         title: `Workout ${h.workout} · ${d}`,
-        text: `${h.minutes} Min · ≈ ${kcalOf(h.minutes)} kcal — Eintrag löschen?`,
+        text: `${h.minutes} Min · ≈ ${kcalOf(h.minutes)} kcal. Eintrag löschen?`,
         actions: [
           { label: "Behalten", cls: "btn--primary", fn: hideModal },
           {

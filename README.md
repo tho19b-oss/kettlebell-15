@@ -29,6 +29,12 @@ Ziel: **Muskelaufbau mit 15 Minuten pro Trainingstag** — ohne Studio, mit 1–
 - 🎬 Technik-Videos laufen als stummer Loop direkt in der Übungskarte — im Workout und im Guide
 - 📴 Offline-fähig, alle Daten bleiben lokal im Browser (localStorage)
 
+## Design
+
+Die App sieht aus wie mattes Gusseisen: Graphitgrund, weiße Schrift, Barlow Condensed für Titel und Zahlen. Farbe trägt nur das Gewicht. Jede Kilo-Angabe erscheint als Punkt im Farbcode der Wettkampf-Kettlebells (8 kg pink, 12 blau, 16 gelb, 20 lila, 24 grün, 28 orange, 32 rot, Zwischengewichte als hellere Stufe). Auch der Timer-Ring färbt sich nach dem Gewicht der laufenden Übung. Details stehen in [`DESIGN.md`](DESIGN.md).
+
+Die Schriften Barlow und Barlow Condensed liegen unter `fonts/` und stehen unter der SIL Open Font License 1.1.
+
 ## Lokal starten
 
 Die App ist reines HTML/CSS/JS — kein Build nötig. Du kannst `index.html` direkt im Browser öffnen.
